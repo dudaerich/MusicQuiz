@@ -1,15 +1,4 @@
-push = require 'lib/push'
-Class = require 'lib/class'
-
-require 'Color'
-require 'Component'
-require 'Container'
-require 'Grid'
-require 'Label'
-require 'Card'
-
-VIRTUAL_WIDTH = 1280
-VIRTUAL_HEIGHT = 720
+require 'src/deps'
 
 WINDOW_WIDTH, WINDOW_HEIGHT = love.window.getDesktopDimensions()
 
