@@ -14,12 +14,12 @@ function love.load()
 
   math.randomseed(os.time())
 
-  font = love.graphics.newFont('assets/font.ttf', 14)
-  largeFont = love.graphics.newFont('assets/font.ttf', 30)
-  background = love.graphics.newImage('assets/background.png')
-  chimney = love.graphics.newImage('assets/chimney.png')
-  smokeImg = love.graphics.newImage('assets/smoke.png')
-  snowflameImg = love.graphics.newImage('assets/snowflame.png')
+  font = love.graphics.newFont('assets/fonts/font.ttf', 14)
+  largeFont = love.graphics.newFont('assets/fonts/font.ttf', 30)
+  background = love.graphics.newImage('assets/images/background.png')
+  chimney = love.graphics.newImage('assets/images/chimney.png')
+  smokeImg = love.graphics.newImage('assets/images/smoke.png')
+  snowflameImg = love.graphics.newImage('assets/images/snowflame.png')
 
   smokeParticles = love.graphics.newParticleSystem(smokeImg)
   smokeParticles:setParticleLifetime(2, 5) -- Particles live at least 2s and at most 5s.
