@@ -6,6 +6,11 @@ IntroState = Class { __includes = State,
         self.smokeImg = love.graphics.newImage('assets/images/smoke.png')
         self.snowflameImg = love.graphics.newImage('assets/images/snowflame.png')
 
+        local borderCollieImg = love.graphics.newImage('assets/images/border-collie-animation.png')
+        self.borderCollie = Animation(borderCollieImg, 6, 0.1)
+        self.borderCollie.x = 740
+        self.borderCollie.y = 480
+
         self.smokeParticles = love.graphics.newParticleSystem(self.smokeImg)
         self.smokeParticles:setParticleLifetime(2, 5) -- Particles live at least 2s and at most 5s.
         self.smokeParticles:setEmissionRate(50)
@@ -122,6 +127,7 @@ IntroState = Class { __includes = State,
         Timer.update(dt, self.timers)
         self.smokeParticles:update(dt)
         self.snowflameParticles:update(dt)
+        self.borderCollie:update(dt)
     end;
 
     draw = function(self)
@@ -129,6 +135,7 @@ IntroState = Class { __includes = State,
         love.graphics.draw(self.background, 0, 0)
         love.graphics.draw(self.smokeParticles, 190, 220)
         love.graphics.draw(self.chimney, 135, 214)
+        self.borderCollie:draw()
         love.graphics.draw(self.snowflameParticles, VIRTUAL_WIDTH / 2, -15)
 
         love.graphics.setColor(1, 1, 1, 1)

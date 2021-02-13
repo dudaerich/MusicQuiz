@@ -8,6 +8,7 @@ require 'src/layout/Component'
 require 'src/layout/Container'
 require 'src/layout/Grid'
 require 'src/layout/Label'
+require 'src/layout/Animation'
 
 require 'src/constants'
 require 'src/Color'
