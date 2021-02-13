@@ -6,7 +6,7 @@ IntroState = Class { __includes = State,
         self.smokeImg = love.graphics.newImage('assets/images/smoke.png')
         self.snowflameImg = love.graphics.newImage('assets/images/snowflame.png')
 
-        local borderCollieImg = love.graphics.newImage('assets/images/border-collie-animation.png')
+        local borderCollieImg = love.graphics.newImage('assets/images/ciri-animation.png')
         self.borderCollie = Animation(borderCollieImg, 6, 0.1)
         self.borderCollie.x = 740
         self.borderCollie.y = 480
