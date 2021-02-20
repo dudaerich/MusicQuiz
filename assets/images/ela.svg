@@ -16,9 +16,9 @@
    id="svg1286"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="ela.svg"
-   inkscape:export-filename="/home/eduda/Projects/MusicQuiz/assets/images/ela/01.png"
-   inkscape:export-xdpi="19"
-   inkscape:export-ydpi="19">
+   inkscape:export-filename="/home/eduda/Projects/MusicQuiz/assets/images/ela/06.png"
+   inkscape:export-xdpi="15"
+   inkscape:export-ydpi="15">
   <defs
      id="defs1280" />
   <sodipodi:namedview
@@ -77,8 +77,9 @@
        sodipodi:nodetypes="cssssssssccc" />
     <g
        id="g2138"
-       inkscape:transform-center-x="-12.283397"
-       inkscape:transform-center-y="-16.532222">
+       inkscape:transform-center-x="-0.43424608"
+       inkscape:transform-center-y="-9.8902449"
+       transform="rotate(-10,184.12967,90.147635)">
       <path
          inkscape:transform-center-y="-14.547847"
          inkscape:transform-center-x="-8.6926228"
@@ -114,7 +115,7 @@
        sodipodi:nodetypes="caacaaaacccaaaaaaaacccaaac" />
     <g
        id="g1531"
-       transform="translate(-95.185715,-138.29149)">
+       transform="translate(-95.185715,-136.17481)">
       <path
          sodipodi:nodetypes="csscc"
          inkscape:connector-curvature="0"
