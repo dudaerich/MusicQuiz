@@ -6,10 +6,15 @@ IntroState = Class { __includes = State,
         self.smokeImg = love.graphics.newImage('assets/images/smoke.png')
         self.snowflameImg = love.graphics.newImage('assets/images/snowflame.png')
 
-        local borderCollieImg = love.graphics.newImage('assets/images/ciri-animation.png')
-        self.borderCollie = Animation(borderCollieImg, 6, 0.1)
-        self.borderCollie.x = 740
-        self.borderCollie.y = 480
+        local ciriImg = love.graphics.newImage('assets/images/ciri-animation.png')
+        self.ciri = Animation(ciriImg, 6, 0.1)
+        self.ciri.x = 740
+        self.ciri.y = 480
+
+        local elaImg = love.graphics.newImage('assets/images/ela-animation.png')
+        self.ela = Animation(elaImg, 6, 0.08)
+        self.ela.x = 940
+        self.ela.y = 500
 
         self.smokeParticles = love.graphics.newParticleSystem(self.smokeImg)
         self.smokeParticles:setParticleLifetime(2, 5) -- Particles live at least 2s and at most 5s.
@@ -127,7 +132,8 @@ IntroState = Class { __includes = State,
         Timer.update(dt, self.timers)
         self.smokeParticles:update(dt)
         self.snowflameParticles:update(dt)
-        self.borderCollie:update(dt)
+        self.ciri:update(dt)
+        self.ela:update(dt)
     end;
 
     draw = function(self)
@@ -135,7 +141,8 @@ IntroState = Class { __includes = State,
         love.graphics.draw(self.background, 0, 0)
         love.graphics.draw(self.smokeParticles, 190, 220)
         love.graphics.draw(self.chimney, 135, 214)
-        self.borderCollie:draw()
+        self.ciri:draw()
+        self.ela:draw()
         love.graphics.draw(self.snowflameParticles, VIRTUAL_WIDTH / 2, -15)
 
         love.graphics.setColor(1, 1, 1, 1)
