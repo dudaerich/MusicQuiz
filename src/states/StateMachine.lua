@@ -25,8 +25,12 @@ StateMachine = Class {
     end;
 
     update = function(self, dt)
-        local state = self.stack[#self.stack]
-        state:update(dt)
+        local topState = self.stack[#self.stack]
+        topState:inputCheck()
+
+        for i, state in ipairs(self.stack) do
+            state:update(dt)
+        end
     end;
 
     draw = function(self)

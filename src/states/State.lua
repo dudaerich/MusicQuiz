@@ -8,6 +8,9 @@ State = Class {
     exit = function(self, params)
     end;
 
+    inputCheck = function(self, key)
+    end;
+
     update = function(self, dt)
     end;
 

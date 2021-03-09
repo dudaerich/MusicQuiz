@@ -18,7 +18,8 @@ function love.load()
 
   local states = {
     initial = InitialState(),
-    intro = IntroState()
+    intro = IntroState(),
+    play = PlayState(),
   }
   stateMachine = StateMachine(states)
   stateMachine:change('initial')
@@ -71,7 +72,7 @@ function love.draw()
 
   push:start()
 
-  --love.graphics.clear(40/255, 45/255, 52/255, 255/255)
+  -- love.graphics.clear(40/255, 45/255, 52/255, 255/255)
 
   stateMachine:draw()
 

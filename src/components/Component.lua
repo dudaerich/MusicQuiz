@@ -4,6 +4,8 @@ Component = Class {
     self.y = 0
     self.width = 0
     self.height = 0
+    self.anchorX = 0
+    self.anchorY = 0
     self.scale = 1
     self.rotation = 0
     self.interactive = false
@@ -35,11 +37,10 @@ Component = Class {
   draw = function(self)
     love.graphics.push()
 
-    love.graphics.translate(self.width/2, self.height/2)
     love.graphics.translate(self.x, self.y)
     love.graphics.scale(self.scale)
     love.graphics.rotate(self.rotation)
-    love.graphics.translate(-self.width/2, -self.height/2)
+    love.graphics.translate(-self.anchorX, -self.anchorY)
 
     self:drawComponent()
 

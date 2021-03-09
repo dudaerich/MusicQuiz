@@ -1,6 +1,6 @@
 InitialState = Class { __includes = State,
 
-    update = function(self, dt)
+    inputCheck = function(self)
         if love.wasAnyKeyPressed() then
             stateMachine:push('intro')
         end

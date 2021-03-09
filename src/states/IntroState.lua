@@ -70,6 +70,8 @@ IntroState = Class { __includes = State,
         self.headingDrabsku.width = VIRTUAL_WIDTH
         self.headingDrabsku.height = 200
         self.headingDrabsku.fg.a = 0
+
+        self.canContinue = false
     end;
 
     enter = function(self)
@@ -119,6 +121,11 @@ IntroState = Class { __includes = State,
                     [self.headingDrabsku.fg] = { a = 1 }
                 })
                 :group(self.timers)
+                Timer.after(2, go):group(self.timers)
+            end,
+            function(go)
+                -- TODO display stlac tlacitlo pre zacatie hry
+                self.canContinue = true
             end
         )()
         --:ease(Easing.inExpo)
@@ -126,6 +133,12 @@ IntroState = Class { __includes = State,
 
     exit = function(self)
         Timer.clear(self.timers)
+    end;
+
+    inputCheck = function(self)
+        if self.canContinue and love.wasAnyKeyPressed() then
+            stateMachine:push('play')
+        end
     end;
 
     update = function(self, dt)
