@@ -2,12 +2,11 @@ PlayState = Class { __includes = State,
     init = function(self)
         self.boardX = VIRTUAL_WIDTH / 2
         self.boardY = -VIRTUAL_HEIGHT
-        self.boardWidth = 1180
-        self.boardHeight = 570
+        self.boardImg = love.graphics.newImage('assets/images/board.png')
+        self.boardWidth, self.boardHeight = self.boardImg:getDimensions()
         self.studShift = 300
         self.studLeftX = (VIRTUAL_WIDTH/2) - self.studShift
         self.studRightX = (VIRTUAL_WIDTH / 2) + self.studShift
-        -- self.studY = self.boardY - (self.boardHeight / 2) - 15
         self.studY = -30
         self.studsCreated = false
         self.ropeLength = 150
@@ -23,29 +22,22 @@ PlayState = Class { __includes = State,
         self.boardShape = love.physics.newRectangleShape(self.boardWidth, self.boardHeight)
         self.boardFixture = love.physics.newFixture(self.boardBody, self.boardShape)
         self.studsCreated = false
-
-        -- Timer.tween(3, {
-        --     [self] = {studY = -10}
-        -- })
     end;
 
     exit = function(self, params)
-        self.boardBody:destroy()
-        self.boardShape:destroy()
-        self.boardFixture:destroy()
-        self.studLeft:destroy()
-        self.studRight:destroy()
-        self.boardRopeJointLeft:destroy()
-        self.boardRopeJointRight:destroy()
-        self.boardFrictionJointLeft:destroy()
-        self.boardFrictionJointRight:destroy()
+        -- self.boardBody:destroy()
+        -- self.boardShape:destroy()
+        -- self.boardFixture:destroy()
+        -- self.studLeft:destroy()
+        -- self.studRight:destroy()
+        -- self.boardRopeJointLeft:destroy()
+        -- self.boardRopeJointRight:destroy()
+        -- self.boardFrictionJointLeft:destroy()
+        -- self.boardFrictionJointRight:destroy()
         self.world:destroy()
     end;
 
     update = function(self, dt)
-        -- Timer.update(dt, self.timers)
-        -- self.studLeft:setY(self.studY)
-        -- self.studRight:setY(self.studY)
         self.world:update(dt)
 
         function createRopeJoint(body1, body2, x1, y1, x2, y2, maxLength)
@@ -63,8 +55,8 @@ PlayState = Class { __includes = State,
         if not self.studsCreated and self.boardBody:getY() > VIRTUAL_HEIGHT / 3 then
             self.studLeft = love.physics.newBody(self.world, self.studLeftX, self.studY, "kinematic")
             self.studRight = love.physics.newBody(self.world, self.studRightX, self.studY, "kinematic")
-            self.boardRopeJointLeft, self.boardFrictionJointLeft = createRopeJoint(self.boardBody, self.studLeft, -self.studShift, -(self.boardHeight/2) + 20, 0, 0, self.ropeLength)
-            self.boardRopeJointRight, self.boardFrictionJointRight = createRopeJoint(self.boardBody, self.studRight, self.studShift, -(self.boardHeight/2) + 20, 0, 0, self.ropeLength)
+            self.boardRopeJointLeft, self.boardFrictionJointLeft = createRopeJoint(self.boardBody, self.studLeft, -self.studShift, -(self.boardHeight/2) + 50, 0, 0, self.ropeLength)
+            self.boardRopeJointRight, self.boardFrictionJointRight = createRopeJoint(self.boardBody, self.studRight, self.studShift, -(self.boardHeight/2) + 50, 0, 0, self.ropeLength)
             self.studsCreated = true
         end
 
@@ -84,6 +76,6 @@ PlayState = Class { __includes = State,
             self.ropeLeft:draw()
             self.ropeRight:draw()
         end
-        love.graphics.polygon('fill', self.boardBody:getWorldPoints(self.boardShape:getPoints()))
+        love.graphics.draw(self.boardImg, self.boardBody:getX(), self.boardBody:getY(), self.boardBody:getAngle(),  1, 1, self.boardWidth / 2, self.boardHeight / 2)
     end;
 }
