@@ -1,7 +1,8 @@
 Card = Class { __includes = Label,
 
   init = function(self, text)
-    Label.init(self, text, Color.BLACK, Color.YELLOW)
+    local font = love.graphics.newFont('assets/fonts/font.ttf', 30)
+    Label.init(self, text, Color.BLACK, Color.YELLOW, font)
     self.interactive = true
     self.text = text
   end;

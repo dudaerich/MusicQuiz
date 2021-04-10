@@ -17,7 +17,9 @@ Container = Class { __includes = Component,
     end
   end;
 
-  draw = function(self)
+  drawComponent = function(self)
+    -- love.graphics.setColor(self.bg.r, self.bg.g, self.bg.b, self.bg.a)
+    -- love.graphics.rectangle('fill', 0, 0, self.width, self.height)
     for i, component in ipairs(self.components) do
       component:draw()
     end

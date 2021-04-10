@@ -1,12 +1,12 @@
 Grid = Class { __includes = Container,
 
-  init = function(self, x, y, width, height, rowLength)
+  init = function(self, width, height, rowLength, xGap, yGap)
     Container.init(self)
-    self.x = x
-    self.y = y
     self.width = width
     self.height = height
     self.rowLength = rowLength
+    self.xGap = xGap or 'auto'
+    self.yGap = yGap or 'auto'
   end;
 
   computeComponentsStats = function(self)
@@ -42,23 +42,23 @@ Grid = Class { __includes = Container,
   reposition = function(self)
     local componentsWidth, componentsHeight, numRows = self:computeComponentsStats()
 
-    local xGap = self:computeGap(self.width - componentsWidth, self.rowLength)
-    local yGap = self:computeGap(self.height - componentsHeight, numRows)
+    local xGap = self:computeXGap(self.width - componentsWidth, self.rowLength)
+    local yGap = self:computeYGap(self.height - componentsHeight, numRows)
 
-    local curX = self.x + xGap
-    local curY = self.y + yGap
+    local curX = xGap
+    local curY = yGap
     local rowHeight = 0
 
     for i, component in ipairs(self.components) do
 
-      component.x = curX
-      component.y = curY
+      component.x = curX + component.anchorX
+      component.y = curY + component.anchorY
 
       curX = curX + component.width + xGap
       rowHeight = math.max(rowHeight, component.height)
 
       if (i % self.rowLength == 0) then
-        curX = self.x + xGap
+        curX = xGap
         curY = curY + rowHeight + yGap
         rowHeight = 0
       end
@@ -66,7 +66,19 @@ Grid = Class { __includes = Container,
     end
   end;
 
-  computeGap = function(self, gapSpace, numItems)
-    return gapSpace / (numItems + 1)
+  computeXGap = function(self, gapSpace, numItems)
+    if self.xGap == 'auto' then
+      return gapSpace / (numItems + 1)
+    else
+      return self.xGap
+    end
+  end;
+
+  computeYGap = function(self, gapSpace, numItems)
+    if self.yGap == 'auto' then
+      return gapSpace / (numItems + 1)
+    else
+      return self.yGap
+    end
   end;
 }

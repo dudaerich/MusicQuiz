@@ -50,4 +50,5 @@ Component = Class {
   onMouseOverEnter = function(self) end;
   onMouseOverExit = function(self) end;
   drawComponent = function(self) end;
+  destroy = function(self) end;
 }

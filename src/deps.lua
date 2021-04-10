@@ -10,6 +10,7 @@ require 'src/components/Grid'
 require 'src/components/Label'
 require 'src/components/Animation'
 require 'src/components/Rope'
+require 'src/components/Board'
 
 require 'src/constants'
 require 'src/Color'

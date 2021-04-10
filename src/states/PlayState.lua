@@ -1,81 +1,67 @@
 PlayState = Class { __includes = State,
     init = function(self)
-        self.boardX = VIRTUAL_WIDTH / 2
-        self.boardY = -VIRTUAL_HEIGHT
-        self.boardImg = love.graphics.newImage('assets/images/board.png')
-        self.boardWidth, self.boardHeight = self.boardImg:getDimensions()
-        self.studShift = 300
-        self.studLeftX = (VIRTUAL_WIDTH/2) - self.studShift
-        self.studRightX = (VIRTUAL_WIDTH / 2) + self.studShift
-        self.studY = -30
-        self.studsCreated = false
-        self.ropeLength = 150
-        self.ropeLeft = Rope()
-        self.ropeRight = Rope()
+        State.init(self)
+
+        self.board = Board()
+        self.grid = Grid(self.board:getWidth() - 200, self.board:getHeight() - 70, 1, 0, 0)
+        self.grid.bg = Color.YELLOW
+        self.cardGrid = Grid(self.grid.width, self.grid.height - 130, 11)
+        self.cardGrid.bg = Color.RED
+
+        -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
+        self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
+        self.title = Label('Team One', Color.BLACK, Color.TRANSPARENT, self.woodFont)
+        self.title.width = self.grid.width
+        self.title.height = 50
+
+        self.grid:addComponent(self.title)
+        self.grid:addComponent(self.cardGrid)
+
+        for i=1,5 do
+            local label = Label('Category', Color.BLACK, Color.TRANSPARENT, self.woodFont)
+            label.width = 200
+            label.height = 50
+            self.cardGrid:addComponent(label)
+            for j=1,10 do
+
+            local card = Card(j)
+            card.width = 70
+            card.height = 50
+            card.anchorX = card.width / 2
+            card.anchorY = card.height / 2
+            self.cardGrid:addComponent(card)
+
+            end
+        end
+
+        self.grid:reposition()
+        self.cardGrid:reposition()
+
+        self.grid.anchorX = self.grid.width / 2
+        self.grid.anchorY = self.grid.height / 2
     end;
 
     enter = function(self)
-
-        self.world = love.physics.newWorld(0, 300)
-        self.boardBody = love.physics.newBody(self.world, VIRTUAL_WIDTH / 2, -VIRTUAL_WIDTH, "dynamic")
-        self.boardBody:setAngle(0.03)
-        self.boardShape = love.physics.newRectangleShape(self.boardWidth, self.boardHeight)
-        self.boardFixture = love.physics.newFixture(self.boardBody, self.boardShape)
-        self.studsCreated = false
+        State.enter(self)
+        self.board:playFallDown()
     end;
 
     exit = function(self, params)
-        -- self.boardBody:destroy()
-        -- self.boardShape:destroy()
-        -- self.boardFixture:destroy()
-        -- self.studLeft:destroy()
-        -- self.studRight:destroy()
-        -- self.boardRopeJointLeft:destroy()
-        -- self.boardRopeJointRight:destroy()
-        -- self.boardFrictionJointLeft:destroy()
-        -- self.boardFrictionJointRight:destroy()
-        self.world:destroy()
+        self.board:destroy()
     end;
 
     update = function(self, dt)
-        self.world:update(dt)
+        self.board:update(dt)
 
-        function createRopeJoint(body1, body2, x1, y1, x2, y2, maxLength)
-            local x1w, y1w = body1:getWorldPoints(x1, y1)
-            local x2w, y2w = body2:getWorldPoints(x2, y2)
-            local ropeJoint = love.physics.newRopeJoint(body1, body2, x1w, y1w, x2w, y2w, maxLength)
-            local frictionJoint = love.physics.newFrictionJoint(body1, body2, x1w, y1w, x2w, y2w)
+        self.grid.x = self.board:getCenterX()
+        self.grid.y = self.board:getCenterY()
+        self.grid.rotation = self.board:getRotation()
 
-            frictionJoint:setMaxForce(1500)
-            frictionJoint:setMaxTorque(1500)
-
-            return ropeJoint, frictionJoint
-        end
-
-        if not self.studsCreated and self.boardBody:getY() > VIRTUAL_HEIGHT / 3 then
-            self.studLeft = love.physics.newBody(self.world, self.studLeftX, self.studY, "kinematic")
-            self.studRight = love.physics.newBody(self.world, self.studRightX, self.studY, "kinematic")
-            self.boardRopeJointLeft, self.boardFrictionJointLeft = createRopeJoint(self.boardBody, self.studLeft, -self.studShift, -(self.boardHeight/2) + 50, 0, 0, self.ropeLength)
-            self.boardRopeJointRight, self.boardFrictionJointRight = createRopeJoint(self.boardBody, self.studRight, self.studShift, -(self.boardHeight/2) + 50, 0, 0, self.ropeLength)
-            self.studsCreated = true
-        end
-
-        if self.studsCreated then
-            self.ropeLeft.x1, self.ropeLeft.y1, self.ropeLeft.x2, self.ropeLeft.y2 = self.boardRopeJointLeft:getAnchors()
-            self.ropeLeft:update(dt)
-
-            self.ropeRight.x1, self.ropeRight.y1, self.ropeRight.x2, self.ropeRight.y2 = self.boardRopeJointRight:getAnchors()
-            self.ropeRight:update(dt)
-        end
+        self.grid:update()
     end;
 
     draw = function(self)
-        love.graphics.setColor(1, 1, 1, 1)
-
-        if self.studsCreated then
-            self.ropeLeft:draw()
-            self.ropeRight:draw()
-        end
-        love.graphics.draw(self.boardImg, self.boardBody:getX(), self.boardBody:getY(), self.boardBody:getAngle(),  1, 1, self.boardWidth / 2, self.boardHeight / 2)
+        self.board:draw()
+        self.grid:draw()
     end;
 }

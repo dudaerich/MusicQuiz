@@ -34,7 +34,6 @@ IntroState = Class { __includes = State,
         self.snowflameParticles:setLinearAcceleration(0, 5, 0, 13) -- Random movement in all directions.
 
         self.discoFont = love.graphics.newFont('assets/fonts/disco.ttf', 70)
-        self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 50)
 
         self.headingHu = Label('HU', Color.BLUE, Color.TRANSPARENT, self.discoFont)
         self.headingHu.scale = 0
