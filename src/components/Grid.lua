@@ -51,8 +51,8 @@ Grid = Class { __includes = Container,
 
     for i, component in ipairs(self.components) do
 
-      component.x = curX + component.anchorX
-      component.y = curY + component.anchorY
+      component:setLeft(curX)
+      component:setTop(curY)
 
       curX = curX + component.width + xGap
       rowHeight = math.max(rowHeight, component.height)

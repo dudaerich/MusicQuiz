@@ -3,12 +3,11 @@ Container = Class { __includes = Component,
   init = function(self)
     Component.init(self)
     self.components = {}
-    self.length = 0
   end;
 
   addComponent = function(self, component)
     table.insert(self.components, component)
-    self.length = self.length + 1
+    component.container = self
   end;
 
   update = function(self, dt)
