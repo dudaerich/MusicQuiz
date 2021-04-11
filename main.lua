@@ -4,7 +4,7 @@ WINDOW_WIDTH, WINDOW_HEIGHT = love.window.getDesktopDimensions()
 
 function love.load()
 
-  love.window.setTitle('Pong')
+  love.window.setTitle('Music Quiz')
 
   push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
       fullscreen = true,
@@ -15,47 +15,20 @@ function love.load()
   math.randomseed(os.time())
 
   love.pressedKeys = {}
+  love.leftClicks = {}
+
+  testSong = love.audio.newSource('games/test.mp3', 'stream')
 
   local states = {
     initial = InitialState(),
     intro = IntroState(),
     play = PlayState(),
+    cardState = CardState()
   }
   stateMachine = StateMachine(states)
   stateMachine:change('initial')
 
   font = love.graphics.newFont('assets/fonts/font.ttf', 14)
-  largeFont = love.graphics.newFont('assets/fonts/font.ttf', 30)
-
-  grid = Grid(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, 1)
-  cardGrid = Grid(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT - 70, 11)
-
-  -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
-  title = Label('Team 1', Color.BLACK, Color.RED)
-  title.width = VIRTUAL_WIDTH
-  title.height = 70
-
-  grid:addComponent(title)
-  grid:addComponent(cardGrid)
-
-  for i=1,8 do
-    local label = Label('Category ' .. tostring(i), Color.BLACK, Color.BLUE)
-    label.width = 200
-    label.height = 50
-    cardGrid:addComponent(label)
-    for j=1,10 do
-
-      local card = Card(j)
-      card.width = 70
-      card.height = 50
-      cardGrid:addComponent(card)
-
-    end
-  end
-
-  grid:reposition()
-  cardGrid:reposition()
-
 end
 
 function love.resize(w, h)
@@ -63,20 +36,17 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
-  --grid:update(dt)
+  Timer.update(dt)
   stateMachine:update(dt)
   love.pressedKeys = {}
+  love.leftClicks = {}
 end
 
 function love.draw()
 
   push:start()
 
-  -- love.graphics.clear(40/255, 45/255, 52/255, 255/255)
-
   stateMachine:draw()
-
-  --grid:draw()
 
   displayFPS()
 
@@ -111,10 +81,26 @@ end
 
 function love.mouse.getVirtualPosition()
   local x, y = love.mouse.getPosition()
+  return computeVirtualPosition(x, y)
+end
+
+function computeVirtualPosition(x, y)
   local xRatio = VIRTUAL_WIDTH / WINDOW_WIDTH
   local yRatio = VIRTUAL_HEIGHT / WINDOW_HEIGHT
 
   return x * xRatio, y * yRatio
+end
+
+function love.mousereleased(x, y, button, istouch, presses)
+  if button == 1 then
+    local vx, vy = computeVirtualPosition(x, y)
+    print('Click ' .. vx .. '; ' .. vy)
+    table.insert(love.leftClicks, {x=vx, y=vy})
+  end
+end
+
+function love.mouse.getLeftClicks()
+  return love.leftClicks
 end
 
 function table.length(t)

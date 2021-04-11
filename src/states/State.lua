@@ -2,10 +2,10 @@ State = Class {
     init = function(self)
     end;
 
-    enter = function(self)
+    enter = function(self, params)
     end;
 
-    exit = function(self, params)
+    exit = function(self)
     end;
 
     inputCheck = function(self, key)

@@ -75,52 +75,42 @@ IntroState = Class { __includes = State,
 
     enter = function(self)
         self.bgAlpha = 0
-        self.timers = {}
 
         Chain(
             function(go)
                 Timer.tween(1, {
                     [self.headingHu] = { scale = 1 }
                 })
-                :group(self.timers)
                 :ease(Easing.outExpo)
-
-                Timer.after(1, go):group(self.timers)
+                :finish(go)
             end,
             function(go)
                 Timer.tween(1, {
                     [self.headingDob] = { scale = 1 }
                 })
-                :group(self.timers)
                 :ease(Easing.outExpo)
-
-                Timer.after(1, go):group(self.timers)
+                :finish(go)
             end,
             function(go)
                 Timer.tween(1, {
                     [self.headingNy] = { scale = 1 }
                 })
-                :group(self.timers)
                 :ease(Easing.outExpo)
-
-                Timer.after(1, go):group(self.timers)
+                :finish(go)
             end,
             function(go)
                 Timer.tween(1, {
                     [self.headingKviz] = { scale = 1 }
                 })
-                :group(self.timers)
                 :ease(Easing.outExpo)
-
-                Timer.after(1, go):group(self.timers)
+                :finish(go)
             end,
             function(go)
                 Timer.tween(2, {
                     [self] = { bgAlpha = 1 },
                     [self.headingDrabsku.fg] = { a = 1 }
                 })
-                :group(self.timers)
-                Timer.after(2, go):group(self.timers)
+                :finish(go)
             end,
             function(go)
                 -- TODO display stlac tlacitlo pre zacatie hry
@@ -130,10 +120,6 @@ IntroState = Class { __includes = State,
         --:ease(Easing.inExpo)
     end;
 
-    exit = function(self)
-        Timer.clear(self.timers)
-    end;
-
     inputCheck = function(self)
         if self.canContinue and love.wasAnyKeyPressed() then
             stateMachine:push('play')
@@ -141,7 +127,6 @@ IntroState = Class { __includes = State,
     end;
 
     update = function(self, dt)
-        Timer.update(dt, self.timers)
         self.smokeParticles:update(dt)
         self.snowflameParticles:update(dt)
         self.ciri:update(dt)

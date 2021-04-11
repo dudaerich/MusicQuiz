@@ -57,7 +57,7 @@ PlayState = Class { __includes = State,
         self.grid.y = self.board:getCenterY()
         self.grid.rotation = self.board:getRotation()
 
-        self.grid:update()
+        self.grid:update(dt)
     end;
 
     draw = function(self)
