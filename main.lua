@@ -14,6 +14,12 @@ function love.load()
 
   math.randomseed(os.time())
 
+  fonts = {
+    small = love.graphics.newFont('assets/fonts/font.ttf', 14),
+    medium = love.graphics.newFont('assets/fonts/font.ttf', 30),
+    large = love.graphics.newFont('assets/fonts/font.ttf', 50)
+  }
+
   love.pressedKeys = {}
   love.leftClicks = {}
 
@@ -27,8 +33,6 @@ function love.load()
   }
   stateMachine = StateMachine(states)
   stateMachine:change('initial')
-
-  font = love.graphics.newFont('assets/fonts/font.ttf', 14)
 end
 
 function love.resize(w, h)
@@ -55,7 +59,7 @@ function love.draw()
 end
 
 function displayFPS()
-  love.graphics.setFont(font)
+  love.graphics.setFont(fonts.small)
   love.graphics.setColor(0, 1, 0, 1)
   love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
 end

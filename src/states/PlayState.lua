@@ -4,9 +4,9 @@ PlayState = Class { __includes = State,
 
         self.board = Board()
         self.grid = Grid(self.board:getWidth() - 200, self.board:getHeight() - 70, 1, 0, 0)
-        self.grid.bg = Color.YELLOW
+        -- self.grid.bg = Color.YELLOW
         self.cardGrid = Grid(self.grid.width, self.grid.height - 130, 11)
-        self.cardGrid.bg = Color.RED
+        -- self.cardGrid.bg = Color.RED
 
         -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
         self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)

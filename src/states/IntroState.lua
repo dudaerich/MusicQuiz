@@ -36,28 +36,32 @@ IntroState = Class { __includes = State,
         self.discoFont = love.graphics.newFont('assets/fonts/disco.ttf', 70)
 
         self.headingHu = Label('HU', Color.BLUE, Color.TRANSPARENT, self.discoFont)
-        self.headingHu.scale = 0
+        self.headingHu.scaleX = 0
+        self.headingHu.scaleY = 0
         self.headingHu.x = 340
         self.headingHu.y = 50
         self.headingHu.width = 200
         self.headingHu.height = 200
 
         self.headingDob = Label('DOB', Color.BLUE, Color.TRANSPARENT, self.discoFont)
-        self.headingDob.scale = 0
+        self.headingDob.scaleX = 0
+        self.headingDob.scaleY = 0
         self.headingDob.x = 440
         self.headingDob.y = 50
         self.headingDob.width = 200
         self.headingDob.height = 200
 
         self.headingNy = Label('NY', Color.BLUE, Color.TRANSPARENT, self.discoFont)
-        self.headingNy.scale = 0
+        self.headingNy.scaleX = 0
+        self.headingNy.scaleY = 0
         self.headingNy.x = 540
         self.headingNy.y = 50
         self.headingNy.width = 200
         self.headingNy.height = 200
 
         self.headingKviz = Label('KVIZ', Color.BLUE, Color.TRANSPARENT, self.discoFont)
-        self.headingKviz.scale = 0
+        self.headingKviz.scaleX = 0
+        self.headingKviz.scaleY = 0
         self.headingKviz.x = 680
         self.headingKviz.y = 50
         self.headingKviz.width = 200
@@ -79,28 +83,28 @@ IntroState = Class { __includes = State,
         Chain(
             function(go)
                 Timer.tween(1, {
-                    [self.headingHu] = { scale = 1 }
+                    [self.headingHu] = { scaleX = 1, scaleY = 1 }
                 })
                 :ease(Easing.outExpo)
                 :finish(go)
             end,
             function(go)
                 Timer.tween(1, {
-                    [self.headingDob] = { scale = 1 }
+                    [self.headingDob] = { scaleX = 1, scaleY = 1 }
                 })
                 :ease(Easing.outExpo)
                 :finish(go)
             end,
             function(go)
                 Timer.tween(1, {
-                    [self.headingNy] = { scale = 1 }
+                    [self.headingNy] = { scaleX = 1, scaleY = 1 }
                 })
                 :ease(Easing.outExpo)
                 :finish(go)
             end,
             function(go)
                 Timer.tween(1, {
-                    [self.headingKviz] = { scale = 1 }
+                    [self.headingKviz] = { scaleX = 1, scaleY = 1 }
                 })
                 :ease(Easing.outExpo)
                 :finish(go)

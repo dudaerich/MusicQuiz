@@ -26,9 +26,6 @@ Grid = Class { __includes = Container,
         componentsHeight = componentsHeight + rowHeight
         rowWidth = 0
         rowHeight = 0
-      end
-
-      if (i % self.rowLength == 1) then
         numRows = numRows + 1
       end
     end

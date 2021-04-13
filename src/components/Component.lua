@@ -7,8 +7,10 @@ Component = Class {
     self.height = 0
     self.anchorX = 0
     self.anchorY = 0
-    self.scale = 1
+    self.scaleX = 1
+    self.scaleY = 1
     self.rotation = 0
+    self.visible = true
     self.interactive = false
     self.mouseOver = false
     self.container = {
@@ -31,7 +33,7 @@ Component = Class {
   end;
 
   update = function(self, dt)
-    if self.interactive then
+    if self.visible and self.interactive then
       self:checkMouseOver()
       self:checkClicks()
     end
@@ -66,16 +68,18 @@ Component = Class {
   end;
 
   draw = function(self)
-    love.graphics.push()
+    if self.visible then
+      love.graphics.push()
 
-    love.graphics.translate(self.x, self.y)
-    love.graphics.scale(self.scale)
-    love.graphics.rotate(self.rotation)
-    love.graphics.translate(-self.anchorX, -self.anchorY)
+      love.graphics.translate(self.x, self.y)
+      love.graphics.scale(self.scaleX, self.scaleY)
+      love.graphics.rotate(self.rotation)
+      love.graphics.translate(-self.anchorX, -self.anchorY)
 
-    self:drawComponent()
+      self:drawComponent()
 
-    love.graphics.pop()
+      love.graphics.pop()
+    end
   end;
 
   getLeft = function(self)
