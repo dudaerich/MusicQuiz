@@ -10,6 +10,14 @@ Container = Class { __includes = Component,
     component.container = self
   end;
 
+  interact = function(self)
+    Component.interact(self)
+
+    for i, component in ipairs(self.components) do
+      component:interact()
+    end
+  end;
+
   update = function(self, dt)
     Component.update(self, dt)
 

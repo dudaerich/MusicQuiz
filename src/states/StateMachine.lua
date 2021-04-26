@@ -6,8 +6,8 @@ StateMachine = Class {
 
     push = function(self, state, params)
         local stateObj = self.states[state]
-        stateObj:enter(params)
         table.insert(self.stack, stateObj)
+        stateObj:enter(params)
     end;
 
     pop = function(self)

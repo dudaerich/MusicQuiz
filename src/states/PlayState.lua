@@ -50,6 +50,11 @@ PlayState = Class { __includes = State,
         self.board:destroy()
     end;
 
+    inputCheck = function(self, key)
+        State.inputCheck(self, key)
+        self.grid:interact()
+    end;
+
     update = function(self, dt)
         self.board:update(dt)
 

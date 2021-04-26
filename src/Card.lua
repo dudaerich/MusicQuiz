@@ -1,22 +1,8 @@
-Card = Class { __includes = Label,
+Card = Class { __includes = Button,
 
   init = function(self, text)
-    Label.init(self, text, Color.BLACK, Color.YELLOW, fonts.medium)
-    self.interactive = true
-    self.text = text
+    Button.init(self, text, Color.BLACK, Color.YELLOW, fonts.medium)
     self.song = testSong
-  end;
-
-  onMouseOverEnter = function(self)
-    self.scaleX = 1.5
-    self.scaleY = 1.5
-    self.z = 100
-  end;
-
-  onMouseOverExit = function(self)
-    self.scaleX = 1
-    self.scaleY = 1
-    self.z = 0
   end;
 
   onLeftClick = function(self)
@@ -58,7 +44,7 @@ Card = Class { __includes = Label,
   end;
 
   update = function(self, dt)
-    Label.update(self, dt)
+    Button.update(self, dt)
     
     if self.scaleX < 0 then
       self.text = ""

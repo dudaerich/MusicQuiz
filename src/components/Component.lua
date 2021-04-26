@@ -32,7 +32,7 @@ Component = Class {
     }
   end;
 
-  update = function(self, dt)
+  interact = function(self)
     if self.visible and self.interactive then
       self:checkMouseOver()
       self:checkClicks()
@@ -114,6 +114,7 @@ Component = Class {
     return self.height
   end;
 
+  update = function(self, dt) end;
   onMouseOverEnter = function(self) end;
   onMouseOverExit = function(self) end;
   onLeftClick = function(self) end;

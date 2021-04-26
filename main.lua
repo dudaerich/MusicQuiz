@@ -29,7 +29,8 @@ function love.load()
     initial = InitialState(),
     intro = IntroState(),
     play = PlayState(),
-    cardState = CardState()
+    cardState = CardState(),
+    countDownState = CountDownState()
   }
   stateMachine = StateMachine(states)
   stateMachine:change('initial')
