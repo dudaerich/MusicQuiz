@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="70mm"
+   height="60mm"
+   viewBox="0 0 70 60"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="card-focus.svg"
+   inkscape:export-filename="/home/eduda/Projects/MusicQuiz/assets/images/card-focus.png"
+   inkscape:export-xdpi="25.4"
+   inkscape:export-ydpi="25.4">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="136.00939"
+     inkscape:cy="113.632"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1848"
+     inkscape:window-height="1016"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-237)">
+    <path
+       style="fill:#000000;fill-opacity:0.1838565;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5.1515428,295.06802 56.0197702,-0.40663 6.514693,-0.53454 -2.539059,-12.96257 -62.4356996,-0.0291 z"
+       id="path840"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       style="fill:#e6ed71;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 5.1971726,291.66108 c 0,0 -1.5199815,-3.87426 -1.9135045,-5.90587 -0.540382,-2.7898 -0.5905878,-8.50447 -0.5905878,-8.50447 L 1.6063988,243.13839 c 0,0 0.2826877,-2.06408 0.6614583,-3.02381 0.2488759,-0.6306 1.0394345,-1.74813 1.0394345,-1.74813 l 62.4605644,0.14174 c 0,0 -1.6181,23.7817 -0.151815,39.52584 0.11989,1.28732 1.10822,4.9046 1.10822,4.9046 0,0 -2.471897,2.07915 -3.810798,2.97657 -2.128061,1.42637 -5.144388,3.18651 -6.677804,3.80466 -3.641301,1.46786 -15.176378,2.22986 -15.176378,2.22986 z"
+       id="path834"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="caccaccscascc" />
+  </g>
+</svg>

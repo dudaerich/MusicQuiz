@@ -26,7 +26,7 @@ PlayState = Class { __includes = State,
 
             local card = Card(j)
             card.width = 70
-            card.height = 50
+            card.height = 60
             card.anchorX = card.width / 2
             card.anchorY = card.height / 2
             self.cardGrid:addComponent(card)

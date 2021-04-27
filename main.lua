@@ -15,9 +15,9 @@ function love.load()
   math.randomseed(os.time())
 
   fonts = {
-    small = love.graphics.newFont('assets/fonts/font.ttf', 14),
-    medium = love.graphics.newFont('assets/fonts/font.ttf', 30),
-    large = love.graphics.newFont('assets/fonts/font.ttf', 50)
+    small = love.graphics.newFont('assets/fonts/komika.ttf', 14),
+    medium = love.graphics.newFont('assets/fonts/komika.ttf', 30),
+    large = love.graphics.newFont('assets/fonts/komika.ttf', 50),
   }
 
   love.pressedKeys = {}
