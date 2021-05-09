@@ -2,8 +2,8 @@ Card = Class { __includes = Button,
 
   init = function(self, text)
     Button.init(self, text, Color.BLACK, Color.YELLOW, fonts.medium)
-    self.imgDefault = love.graphics.newImage('assets/images/card.png')
-    self.imgFocus = love.graphics.newImage('assets/images/card-focus.png')
+    self.imgDefault = images.card
+    self.imgFocus = images.cardFocus
     self.img = self.imgDefault
     self.song = testSong
   end;

@@ -20,6 +20,12 @@ function love.load()
     large = love.graphics.newFont('assets/fonts/komika.ttf', 50),
   }
 
+  images = {
+    pin = love.graphics.newImage('assets/images/pin.png'),
+    card = love.graphics.newImage('assets/images/card.png'),
+    cardFocus = love.graphics.newImage('assets/images/card-focus.png')
+  }
+
   love.pressedKeys = {}
   love.leftClicks = {}
 

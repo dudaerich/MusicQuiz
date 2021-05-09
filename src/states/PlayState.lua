@@ -17,20 +17,23 @@ PlayState = Class { __includes = State,
         self.grid:addComponent(self.title)
         self.grid:addComponent(self.cardGrid)
 
+        local cards = {}
+
         for i=1,5 do
             local label = Label('Category', Color.BLACK, Color.TRANSPARENT, self.woodFont)
             label.width = 200
             label.height = 50
             self.cardGrid:addComponent(label)
+
             for j=1,10 do
+                local card = Card(j)
+                card.width = 70
+                card.height = 60
+                card.anchorX = card.width / 2
+                card.anchorY = card.height / 2
 
-            local card = Card(j)
-            card.width = 70
-            card.height = 60
-            card.anchorX = card.width / 2
-            card.anchorY = card.height / 2
-            self.cardGrid:addComponent(card)
-
+                self.cardGrid:addComponent(card)
+                table.insert(cards, card)
             end
         end
 
@@ -39,6 +42,16 @@ PlayState = Class { __includes = State,
 
         self.grid.anchorX = self.grid.width / 2
         self.grid.anchorY = self.grid.height / 2
+
+        for _, card in ipairs(cards) do
+            local pin = Image(images.pin)
+            pin.anchorX = pin.width * 0.4
+            pin.anchorY = pin.height
+            pin.x = card.x
+            pin.y = card.y - card.anchorY + 15
+            pin.z = 500
+            self.cardGrid:addComponent(pin)
+        end
     end;
 
     enter = function(self)

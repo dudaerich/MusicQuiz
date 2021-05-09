@@ -15,7 +15,10 @@
    version="1.1"
    id="svg1459"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="pin.svg">
+   sodipodi:docname="pin.svg"
+   inkscape:export-filename="/home/eduda/Projects/MusicQuiz/assets/images/pin.png"
+   inkscape:export-xdpi="26"
+   inkscape:export-ydpi="26">
   <defs
      id="defs1453" />
   <sodipodi:namedview
@@ -25,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.9195959"
-     inkscape:cx="18.237071"
-     inkscape:cy="33.300241"
+     inkscape:zoom="2.8"
+     inkscape:cx="-27.353448"
+     inkscape:cy="108.93237"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -52,5 +55,58 @@
      inkscape:label="Vrstva 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-277)" />
+     transform="translate(0,-277)">
+    <path
+       style="fill:#787878;fill-opacity:1;stroke:#000000;stroke-width:0.065;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 7.9011552,283.70334 -3.1404167,8.95353 3.7918863,-8.68626 z"
+       id="path2082"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <g
+       id="g2057"
+       transform="rotate(-7.278785,7.8821401,283.74844)">
+      <ellipse
+         transform="matrix(0.94203862,-0.33550447,0.6173156,0.78671561,0,0)"
+         ry="3.6818213"
+         rx="3.4912083"
+         cy="286.37686"
+         cx="-179.86389"
+         id="path2023"
+         style="fill:#cc0609;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.10269362;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <ellipse
+         transform="matrix(0.94203862,-0.33550447,0.6173156,0.78671561,0,0)"
+         ry="3.6818213"
+         rx="3.4912083"
+         cy="286.11264"
+         cx="-179.62962"
+         id="path2023-3"
+         style="fill:#f8181b;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.10269362;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:#f8181b;fill-opacity:1;stroke:#000000;stroke-width:0.085;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 8.8512569,280.02424 c 0,0 -2.7092662,2.24747 -3.0954919,3.84759 -0.1362737,0.56459 0.048972,1.21125 0.3526627,1.70632 0.2424623,0.39526 0.6603336,0.68628 1.086789,0.86835 0.4970803,0.21224 1.0798584,0.33351 1.6071707,0.21488 0.435507,-0.098 0.8807065,-0.35422 1.1234806,-0.72881 0.925174,-1.42756 0.786508,-5.04242 0.786508,-5.04242 z"
+       id="path2080"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="caaaaacc" />
+    <g
+       transform="matrix(0.61175339,-0.0781372,0.0781372,0.61175339,-17.264309,106.41127)"
+       id="g2057-7">
+      <ellipse
+         transform="matrix(0.94203862,-0.33550447,0.6173156,0.78671561,0,0)"
+         ry="3.6818213"
+         rx="3.4912083"
+         cy="286.37686"
+         cx="-179.86389"
+         id="path2023-5"
+         style="fill:#cc0609;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.10269362;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <ellipse
+         transform="matrix(0.94203862,-0.33550447,0.6173156,0.78671561,0,0)"
+         ry="3.6818213"
+         rx="3.4912083"
+         cy="286.11264"
+         cx="-179.62962"
+         id="path2023-3-3"
+         style="fill:#f8181b;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.10269362;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+  </g>
 </svg>
