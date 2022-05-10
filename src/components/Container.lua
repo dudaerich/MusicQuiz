@@ -10,6 +10,10 @@ Container = Class { __includes = Component,
     component.container = self
   end;
 
+  clear = function(self)
+    self.components = {}
+  end;
+
   interact = function(self)
     Component.interact(self)
 

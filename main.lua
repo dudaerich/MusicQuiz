@@ -23,7 +23,10 @@ function love.load()
   images = {
     pin = love.graphics.newImage('assets/images/pin.png'),
     card = love.graphics.newImage('assets/images/card.png'),
-    cardFocus = love.graphics.newImage('assets/images/card-focus.png')
+    cardFocus = love.graphics.newImage('assets/images/card-focus.png'),
+    cardReverseLarge = love.graphics.newImage('assets/images/card-reverse-large.png'),
+    thumbsUp = love.graphics.newImage('assets/images/thumbs-up.png'),
+    thumbsDown = love.graphics.newImage('assets/images/thumbs-down.png')
   }
 
   love.pressedKeys = {}
