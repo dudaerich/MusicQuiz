@@ -26,7 +26,12 @@ function love.load()
     cardFocus = love.graphics.newImage('assets/images/card-focus.png'),
     cardReverseLarge = love.graphics.newImage('assets/images/card-reverse-large.png'),
     thumbsUp = love.graphics.newImage('assets/images/thumbs-up.png'),
-    thumbsDown = love.graphics.newImage('assets/images/thumbs-down.png')
+    thumbsDown = love.graphics.newImage('assets/images/thumbs-down.png'),
+    stopWatch = {
+      bg = love.graphics.newImage('assets/images/stopwatch-bg.png'),
+      fg = love.graphics.newImage('assets/images/stopwatch-fg.png'),
+      needle = love.graphics.newImage('assets/images/stopwatch-needle.png')
+    }
   }
 
   love.pressedKeys = {}

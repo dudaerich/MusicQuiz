@@ -13,8 +13,16 @@ CardState = Class { __includes = State,
 
         self.playBtn = Label("Play", Color.BLACK, Color.TRANSPARENT, fonts.large)
         self.playBtn.width = self.card.width
-        self.playBtn.height = 300
+        self.playBtn.height = 200
         self.playBtn.visible = false
+
+        self.stopWatch = StopWatch(5)
+        self.stopWatch.anchorX = self.stopWatch.width / 2
+        self.stopWatch.anchorY = self.stopWatch.height / 2
+        self.stopWatch.visible = false
+
+        self.stopWatchRow = Grid(self.card.width, self.stopWatch.height, 1)
+        self.stopWatchRow:addComponent(self.stopWatch)
 
         self.passBtn = ImageButton(images.thumbsUp)
         self.passBtn.anchorX = self.passBtn.width / 2
@@ -31,10 +39,12 @@ CardState = Class { __includes = State,
         end
 
         self.mainGrid:addComponent(self.playBtn)
+        self.mainGrid:addComponent(self.stopWatchRow)
         self.mainGrid:addComponent(self.answers)
 
         self.mainGrid:reposition()
         self.answers:reposition()
+        self.stopWatchRow:reposition()
 
         self.timers = {}
     end;
@@ -53,7 +63,10 @@ CardState = Class { __includes = State,
 
                 self.song:seek(startPosition, "seconds")
                 self.song:play()
-
+                
+                Timer.after(2, go):group(self.timer)
+            end,
+            function(go)
                 self.answers.rowLength = 1
                 self.answers:addComponent(self.passBtn)
                 self.answers:reposition()
@@ -90,11 +103,41 @@ CardState = Class { __includes = State,
                     end
                 )()
 
-                Timer.after(5, go):group(self.timers)
+                Timer.after(8, go):group(self.timers)
             end,
             function(go)
                 self:stopSong()
+                Timer.after(1.5, go):group(self.timers)
+            end,
+            function(go)
+                self.stopWatch.visible = true
 
+                Timer.tween(0.5, {
+                    [self.stopWatch] = {
+                        scaleX = 1.5,
+                        scaleY = 1.5
+                    }
+                })
+                :ease(Easing.outExpo)
+                :group(self.timers)
+                :finish(go)
+            end,
+            function(go)
+                Timer.tween(0.2, {
+                    [self.stopWatch] = {
+                        scaleX = 1,
+                        scaleY = 1
+                    }
+                })
+                :ease(Easing.inExpo)
+                :group(self.timers)
+                :finish(go)
+            end,
+            function(go)
+                self.stopWatch.onEnd = go
+                self.stopWatch:start()
+            end,
+            function(go)
                 local startX = self.passBtn.x
                 local startY = self.passBtn.y
 
@@ -134,7 +177,6 @@ CardState = Class { __includes = State,
             function(go)
                 self.passBtn.interactive = true
                 self.failBtn.interactive = true
-                self.images = {}
             end
         )
 
@@ -150,6 +192,10 @@ CardState = Class { __includes = State,
 
     exit = function(self)
         self:stopSong()
+        self.stopWatch:reset()
+        self.stopWatch.visible = false
+        self.stopWatch.scaleX = 1
+        self.stopWatch.scaleY = 1
         Timer.clear(self.timers)
         self.timers = {}
         self.answers:clear()
@@ -162,6 +208,7 @@ CardState = Class { __includes = State,
 
     update = function(self, dt)
         Timer.update(dt, self.timers)
+        self.mainGrid:update(dt)
     end;
 
     draw = function(self)

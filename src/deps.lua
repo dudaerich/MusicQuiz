@@ -18,6 +18,7 @@ require 'src/components/Board'
 require 'src/constants'
 require 'src/Color'
 require 'src/Card'
+require 'src/StopWatch'
 
 require 'src/states/StateMachine'
 require 'src/states/State'
