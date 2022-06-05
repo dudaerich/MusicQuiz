@@ -31,6 +31,10 @@ function love.load()
       bg = love.graphics.newImage('assets/images/stopwatch-bg.png'),
       fg = love.graphics.newImage('assets/images/stopwatch-fg.png'),
       needle = love.graphics.newImage('assets/images/stopwatch-needle.png')
+    },
+    answerCover = {
+      bg = love.graphics.newImage('assets/images/answer-cover.png'),
+      fg = love.graphics.newImage('assets/images/answer-uncover.png')
     }
   }
 

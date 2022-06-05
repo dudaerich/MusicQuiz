@@ -9,12 +9,9 @@ CardState = Class { __includes = State,
         self.mainGrid.x = self.card.x
         self.mainGrid.y = self.card.y
 
-        self.answers = Grid(self.card.width, 100, 1)
-
-        self.playBtn = Label("Play", Color.BLACK, Color.TRANSPARENT, fonts.large)
-        self.playBtn.width = self.card.width
-        self.playBtn.height = 200
-        self.playBtn.visible = false
+        self.answer = Answer('Sia - Cheap Thrills')
+        self.answerRow = Grid(self.card.width, self.answer.height, 1)
+        self.answerRow:addComponent(self.answer)
 
         self.stopWatch = StopWatch(5)
         self.stopWatch.anchorX = self.stopWatch.width / 2
@@ -23,6 +20,8 @@ CardState = Class { __includes = State,
 
         self.stopWatchRow = Grid(self.card.width, self.stopWatch.height, 1)
         self.stopWatchRow:addComponent(self.stopWatch)
+
+        self.answers = Grid(self.card.width, 100, 1)
 
         self.passBtn = ImageButton(images.thumbsUp)
         self.passBtn.anchorX = self.passBtn.width / 2
@@ -38,11 +37,12 @@ CardState = Class { __includes = State,
             stateMachine:pop()
         end
 
-        self.mainGrid:addComponent(self.playBtn)
+        self.mainGrid:addComponent(self.answerRow)
         self.mainGrid:addComponent(self.stopWatchRow)
         self.mainGrid:addComponent(self.answers)
 
         self.mainGrid:reposition()
+        self.answerRow:reposition()
         self.answers:reposition()
         self.stopWatchRow:reposition()
 
@@ -177,6 +177,7 @@ CardState = Class { __includes = State,
             function(go)
                 self.passBtn.interactive = true
                 self.failBtn.interactive = true
+                self.answer:uncover()
             end
         )
 
@@ -192,6 +193,7 @@ CardState = Class { __includes = State,
 
     exit = function(self)
         self:stopSong()
+        self.answer:reset()
         self.stopWatch:reset()
         self.stopWatch.visible = false
         self.stopWatch.scaleX = 1
