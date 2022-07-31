@@ -26,16 +26,10 @@ CardState = Class { __includes = State,
         self.passBtn = ImageButton(images.thumbsUp)
         self.passBtn.anchorX = self.passBtn.width / 2
         self.passBtn.anchorY = self.passBtn.height / 2
-        self.passBtn.onLeftClick = function(self)
-            stateMachine:pop()
-        end
 
         self.failBtn = ImageButton(images.thumbsDown)
         self.failBtn.anchorX = self.failBtn.width / 2
         self.failBtn.anchorY = self.failBtn.height / 2
-        self.failBtn.onLeftClick = function(self)
-            stateMachine:pop()
-        end
 
         self.mainGrid:addComponent(self.answerRow)
         self.mainGrid:addComponent(self.stopWatchRow)
@@ -51,6 +45,16 @@ CardState = Class { __includes = State,
 
     enter = function(self, params)
         State.enter(self, params)
+
+        self.passBtn.onLeftClick = function(self)
+            teamManager:getCurrentTeam():addScoreRecord(ScoreRecord(1))
+            stateMachine:pop()
+        end
+
+        self.failBtn.onLeftClick = function(self)
+            teamManager:getCurrentTeam():addScoreRecord(ScoreRecord(0))
+            stateMachine:pop()
+        end
 
         self.passBtn:reset()
         self.failBtn:reset()
@@ -201,6 +205,7 @@ CardState = Class { __includes = State,
         Timer.clear(self.timers)
         self.timers = {}
         self.answers:clear()
+        teamManager:nextTeam()
     end;
 
     inputCheck = function(self, key)

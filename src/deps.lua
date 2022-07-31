@@ -28,3 +28,7 @@ require 'src/states/IntroState'
 require 'src/states/PlayState'
 require 'src/states/CardState'
 require 'src/states/CountDownState'
+
+require 'src/entities/ScoreRecord'
+require 'src/entities/Team'
+require 'src/entities/TeamManager'

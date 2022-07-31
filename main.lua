@@ -27,6 +27,7 @@ function love.load()
     cardReverseLarge = love.graphics.newImage('assets/images/card-reverse-large.png'),
     thumbsUp = love.graphics.newImage('assets/images/thumbs-up.png'),
     thumbsDown = love.graphics.newImage('assets/images/thumbs-down.png'),
+    scoreButton = love.graphics.newImage('assets/images/score-button.png'),
     stopWatch = {
       bg = love.graphics.newImage('assets/images/stopwatch-bg.png'),
       fg = love.graphics.newImage('assets/images/stopwatch-fg.png'),
@@ -37,6 +38,11 @@ function love.load()
       fg = love.graphics.newImage('assets/images/answer-uncover.png')
     }
   }
+
+  teamManager = TeamManager()
+  teamManager:addTeam(Team('Team One'))
+  teamManager:addTeam(Team('Team Two'))
+  teamManager:addTeam(Team('Team Three'))
 
   love.pressedKeys = {}
   love.leftClicks = {}

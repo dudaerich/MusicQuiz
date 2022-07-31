@@ -10,9 +10,11 @@ PlayState = Class { __includes = State,
 
         -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
         self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
-        self.title = Label('Team One', Color.BLACK, Color.TRANSPARENT, self.woodFont)
+        self.title = Label(teamManager:getCurrentTeam().name, Color.BLACK, Color.TRANSPARENT, self.woodFont)
         self.title.width = self.grid.width
         self.title.height = 50
+
+        teamManager:registerTeamChangeListener(function() self.title.text = teamManager:getCurrentTeam().name end)
 
         self.grid:addComponent(self.title)
         self.grid:addComponent(self.cardGrid)
@@ -52,23 +54,69 @@ PlayState = Class { __includes = State,
             pin.z = 500
             self.cardGrid:addComponent(pin)
         end
+
+        self.scoreButton = ImageButton(images.scoreButton)
+        self.scoreButton.anchorX = self.scoreButton.width / 2
+        self.scoreButton.anchorY = self.scoreButton.height / 2
+        self.scoreButton.x = VIRTUAL_WIDTH - 60
+        self.scoreButton.y = VIRTUAL_HEIGHT - 60
+        self.scoreButton.visible = false
+
+        self.timers = {}
     end;
 
     enter = function(self)
         State.enter(self)
         self.board:playFallDown()
+
+        Chain(
+            function(go)
+                Timer.after(5, go):group(self.timers)
+            end,
+            function(go)
+                self.scoreButton.visible = true
+                Timer.tween(0.5, {
+                    [self.scoreButton] = {
+                        scaleX = 1.5,
+                        scaleY = 1.5
+                    }
+                })
+                :ease(Easing.outExpo)
+                :group(self.timers)
+                :finish(go)
+            end,
+            function(go)
+                Timer.tween(0.2, {
+                    [self.scoreButton] = {
+                        scaleX = 1,
+                        scaleY = 1
+                    }
+                })
+                :ease(Easing.inExpo)
+                :group(self.timers)
+                :finish(go)
+            end,
+            function(go)
+                self.scoreButton.interactive = true
+            end
+        )()
     end;
 
     exit = function(self, params)
         self.board:destroy()
+        self.scoreButton:reset()
+        Timer.clear(self.timers)
+        self.timers = {}
     end;
 
     inputCheck = function(self, key)
         State.inputCheck(self, key)
         self.grid:interact()
+        self.scoreButton:interact()
     end;
 
     update = function(self, dt)
+        Timer.update(dt, self.timers)
         self.board:update(dt)
 
         self.grid.x = self.board:getCenterX()
@@ -76,10 +124,12 @@ PlayState = Class { __includes = State,
         self.grid.rotation = self.board:getRotation()
 
         self.grid:update(dt)
+        self.scoreButton:update(dt)
     end;
 
     draw = function(self)
         self.board:draw()
         self.grid:draw()
+        self.scoreButton:draw()
     end;
 }
