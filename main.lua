@@ -36,7 +36,9 @@ function love.load()
     answerCover = {
       bg = love.graphics.newImage('assets/images/answer-cover.png'),
       fg = love.graphics.newImage('assets/images/answer-uncover.png')
-    }
+    },
+    closeButton = love.graphics.newImage('assets/images/close-button.png'),
+    board = love.graphics.newImage('assets/images/board.png')
   }
 
   teamManager = TeamManager()
@@ -54,7 +56,8 @@ function love.load()
     intro = IntroState(),
     play = PlayState(),
     cardState = CardState(),
-    countDownState = CountDownState()
+    countDownState = CountDownState(),
+    scoreState = ScoreState()
   }
   stateMachine = StateMachine(states)
   stateMachine:change('initial')
@@ -138,4 +141,12 @@ function table.length(t)
     length = length + 1
   end
   return length
+end
+
+function table.clone(orig)
+  local copy = {}
+  for orig_key, orig_value in pairs(orig) do
+    copy[orig_key] = orig_value
+  end
+  return copy
 end

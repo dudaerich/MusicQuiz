@@ -3,21 +3,22 @@ Board = Class { __includes = Component,
   init = function(self)
     Component.init(self)
 
-    self.boardImg = love.graphics.newImage('assets/images/board.png')
+    self.boardImg = images.board
     self.boardWidth, self.boardHeight = self.boardImg:getDimensions()
+    self.studsCreated = false
+  end;
+
+  playFallDown = function(self)
     self.boardX = VIRTUAL_WIDTH / 2
     self.boardY = -VIRTUAL_HEIGHT
     self.studShift = 300
     self.studLeftX = (VIRTUAL_WIDTH/2) - self.studShift
     self.studRightX = (VIRTUAL_WIDTH / 2) + self.studShift
     self.studY = -30
-    self.studsCreated = false
     self.ropeLength = 150
     self.ropeLeft = Rope()
     self.ropeRight = Rope()
-  end;
 
-  playFallDown = function(self)
     self.world = love.physics.newWorld(0, 300)
     self.boardBody = love.physics.newBody(self.world, VIRTUAL_WIDTH / 2, -VIRTUAL_WIDTH, "dynamic")
     self.boardBody:setAngle(0.03)
@@ -29,6 +30,10 @@ Board = Class { __includes = Component,
   destroy = function(self)
     Component.destroy(self)
     self.world:destroy()
+    self.world = nil
+    self.boardBody = nil
+    self.studsCreated = false
+    self.forceY = nil
   end;
 
   update = function(self, dt)
@@ -50,7 +55,7 @@ Board = Class { __includes = Component,
         return ropeJoint, frictionJoint
     end
 
-    if not self.studsCreated and self.boardBody:getY() > VIRTUAL_HEIGHT / 3 then
+    if not self.studsCreated and self.boardBody and self.boardBody:getY() > VIRTUAL_HEIGHT / 3 then
         self.studLeft = love.physics.newBody(self.world, self.studLeftX, self.studY, "kinematic")
         self.studRight = love.physics.newBody(self.world, self.studRightX, self.studY, "kinematic")
         self.boardRopeJointLeft, self.boardFrictionJointLeft = createRopeJoint(self.boardBody, self.studLeft, -self.studShift, -(self.boardHeight/2) + 50, 0, 0, self.ropeLength)
@@ -64,6 +69,10 @@ Board = Class { __includes = Component,
 
         self.ropeRight.x1, self.ropeRight.y1, self.ropeRight.x2, self.ropeRight.y2 = self.boardRopeJointRight:getAnchors()
         self.ropeRight:update(dt)
+    end
+
+    if self.forceY then
+        self.boardBody:setY(self.forceY)
     end
   end;
 

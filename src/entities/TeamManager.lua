@@ -13,6 +13,12 @@ TeamManager = Class {
         return self.teams[self.currentTeam + 1]
     end;
 
+    getAllTeamsOrderedByScore = function(self)
+        local teamsSorted = table.clone(self.teams)
+        table.sort(teamsSorted, function (a, b) return a:getScore() > b:getScore() end)
+        return teamsSorted
+    end;
+
     nextTeam = function(self)
         self.currentTeam = (self.currentTeam + 1) % #self.teams
 
