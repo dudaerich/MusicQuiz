@@ -1,6 +1,6 @@
 Answer = Class { __includes = Component,
 
-    init = function(self, text)
+    init = function(self)
         Component.init(self)
 
         self.bg = images.answerCover.bg
@@ -9,12 +9,14 @@ Answer = Class { __includes = Component,
 
         self.width, self.height = self.bg:getDimensions()
 
+        self.timers = {}
+        self.uncoverProgress = 0
+    end;
+
+    setText = function(self, text)
         self.text = Label(text, Color.BLACK, Color.TRANSPARENT, fonts.medium)
         self.text.width = self.width
         self.text.height = self.height
-
-        self.timers = {}
-        self.uncoverProgress = 0
     end;
 
     uncover = function(self)

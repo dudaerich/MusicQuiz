@@ -9,7 +9,7 @@ CardState = Class { __includes = State,
         self.mainGrid.x = self.card.x
         self.mainGrid.y = self.card.y
 
-        self.answer = Answer('Sia - Cheap Thrills')
+        self.answer = Answer()
         self.answerRow = Grid(self.card.width, self.answer.height, 1)
         self.answerRow:addComponent(self.answer)
 
@@ -59,14 +59,13 @@ CardState = Class { __includes = State,
         self.passBtn:reset()
         self.failBtn:reset()
 
+        self.song = params.song
+        self.answer:setText(self.song:getAnswer())
+
         local chain = Chain(
             function(go)
-                self.song = params.song
-                local duration = self.song:getDuration("seconds")
-                local startPosition = math.random(30, duration - 30)
-
-                self.song:seek(startPosition, "seconds")
-                self.song:play()
+                self.song:getStream():seek(self.song:getStart(), "seconds")
+                self.song:getStream():play()
                 
                 Timer.after(2, go):group(self.timer)
             end,
@@ -107,7 +106,7 @@ CardState = Class { __includes = State,
                     end
                 )()
 
-                Timer.after(8, go):group(self.timers)
+                Timer.after(self.song:getDuration() - 2, go):group(self.timers)
             end,
             function(go)
                 self:stopSong()
@@ -190,7 +189,7 @@ CardState = Class { __includes = State,
 
     stopSong = function(self)
         if self.song then
-            self.song:stop()
+            self.song:getStream():stop()
             self.song = nil
         end
     end;

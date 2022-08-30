@@ -1,11 +1,11 @@
 Card = Class { __includes = Button,
 
-  init = function(self, text)
+  init = function(self, text, song)
     Button.init(self, text, Color.BLACK, Color.YELLOW, fonts.medium)
     self.imgDefault = images.card
     self.imgFocus = images.cardFocus
     self.img = self.imgDefault
-    self.song = testSong
+    self.song = song
   end;
 
   onMouseOverEnter = function(self)

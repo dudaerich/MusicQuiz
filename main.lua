@@ -4,6 +4,13 @@ WINDOW_WIDTH, WINDOW_HEIGHT = love.window.getDesktopDimensions()
 
 function love.load()
 
+  print("Program name", arg[0])
+  print("Number of arguments: ", #arg)
+  print("Arguments:")
+  for l = 1, #arg do
+    print(l," ",arg[l])
+  end
+
   love.window.setTitle('Music Quiz')
 
   push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -45,6 +52,8 @@ function love.load()
   teamManager:addTeam(Team('Team One'))
   teamManager:addTeam(Team('Team Two'))
   teamManager:addTeam(Team('Team Three'))
+
+  game = GameLoader.load('2022')
 
   love.pressedKeys = {}
   love.leftClicks = {}

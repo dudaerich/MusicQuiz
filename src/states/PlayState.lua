@@ -21,14 +21,14 @@ PlayState = Class { __includes = State,
 
         local cards = {}
 
-        for i=1,5 do
-            local label = Label('Category', Color.BLACK, Color.TRANSPARENT, self.woodFont)
+        for i, category in ipairs(game:getCategories()) do
+            local label = Label(category:getTitle(), Color.BLACK, Color.TRANSPARENT, self.woodFont)
             label.width = 200
             label.height = 50
             self.cardGrid:addComponent(label)
 
-            for j=1,10 do
-                local card = Card(j)
+            for j, song in ipairs(category:getSongs()) do
+                local card = Card(j, song)
                 card.width = 70
                 card.height = 60
                 card.anchorX = card.width / 2
