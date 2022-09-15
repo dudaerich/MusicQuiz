@@ -46,7 +46,8 @@ function love.load()
       fg = love.graphics.newImage('assets/images/answer-uncover.png')
     },
     closeButton = love.graphics.newImage('assets/images/close-button.png'),
-    board = love.graphics.newImage('assets/images/board.png')
+    board = love.graphics.newImage('assets/images/board.png'),
+    plate = love.graphics.newImage('assets/images/plate.png'),
   }
 
   game = Game.load('2022')

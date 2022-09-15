@@ -13,8 +13,27 @@ BreakState = Class { __includes = State,
 
         self.grid = Grid(self.board:getWidth() - 200, self.board:getHeight() - 70, 1, 0, 0)
         -- self.grid.bg = Color.YELLOW
+        self.songsGrid = Grid(self.grid.width, self.grid.height - 130, 2)
+        -- self.songsGrid.bg = Color.RED
+
+        self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
+        self.title = Label('Prestavka', Color.BLACK, Color.TRANSPARENT, self.woodFont)
+        self.title.width = self.grid.width
+        self.title.height = 50
+
+        self.grid:addComponent(self.title)
+        self.grid:addComponent(self.songsGrid)
+
+        for i, song in pairs(gameStatus:getPlayedSongsBeforeBreak()) do
+            local songLabel = SongButton(song)
+            songLabel.anchorX = songLabel.width / 2
+            songLabel.anchorY = songLabel.height / 2
+
+            self.songsGrid:addComponent(songLabel)
+        end
 
         self.grid:reposition()
+        self.songsGrid:reposition()
 
         self.grid.anchorX = self.grid.width / 2
         self.grid.anchorY = self.grid.height / 2

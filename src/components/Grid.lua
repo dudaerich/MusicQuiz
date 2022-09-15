@@ -30,6 +30,10 @@ Grid = Class { __includes = Container,
       end
     end
 
+    if (#self.components % self.rowLength ~= 0) then
+      numRows = numRows + 1
+    end
+
     componentsWidth = math.max(componentsWidth, rowWidth)
     componentsHeight = componentsHeight + rowHeight
 
