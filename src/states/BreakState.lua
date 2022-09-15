@@ -1,4 +1,4 @@
-ScoreState = Class { __includes = State,
+BreakState = Class { __includes = State,
     init = function(self)
         State.init(self)
     end;
@@ -13,33 +13,8 @@ ScoreState = Class { __includes = State,
 
         self.grid = Grid(self.board:getWidth() - 200, self.board:getHeight() - 70, 1, 0, 0)
         -- self.grid.bg = Color.YELLOW
-        self.teamGrid = Grid(self.grid.width, self.grid.height - 130, 2)
-        -- self.teamGrid.bg = Color.RED
-
-        -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
-        self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
-        self.title = Label('Skore', Color.BLACK, Color.TRANSPARENT, self.woodFont)
-        self.title.width = self.grid.width
-        self.title.height = 50
-
-        self.grid:addComponent(self.title)
-        self.grid:addComponent(self.teamGrid)
-
-        for i, team in pairs(gameStatus:getAllTeamsOrderedByScore()) do
-            local teamLabel = Label(team.name, Color.BLACK, Color.TRANSPARENT, fonts.medium)
-            teamLabel.width = 200
-            teamLabel.height = 50
-
-            local scoreLabel = Label(team:getScore(), Color.BLACK, Color.TRANSPARENT, fonts.medium)
-            scoreLabel.width = 200
-            scoreLabel.height = 50
-
-            self.teamGrid:addComponent(teamLabel)
-            self.teamGrid:addComponent(scoreLabel)
-        end
 
         self.grid:reposition()
-        self.teamGrid:reposition()
 
         self.grid.anchorX = self.grid.width / 2
         self.grid.anchorY = self.grid.height / 2

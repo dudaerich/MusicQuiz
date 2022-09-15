@@ -10,11 +10,11 @@ PlayState = Class { __includes = State,
 
         -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
         self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
-        self.title = Label(teamManager:getCurrentTeam().name, Color.BLACK, Color.TRANSPARENT, self.woodFont)
+        self.title = Label(gameStatus:getCurrentTeam():getName(), Color.BLACK, Color.TRANSPARENT, self.woodFont)
         self.title.width = self.grid.width
         self.title.height = 50
 
-        teamManager:registerTeamChangeListener(function() self.title.text = teamManager:getCurrentTeam().name end)
+        gameStatus:registerTeamChangeListener(function() self.title.text = gameStatus:getCurrentTeam():getName() end)
 
         self.grid:addComponent(self.title)
         self.grid:addComponent(self.cardGrid)
@@ -33,6 +33,7 @@ PlayState = Class { __includes = State,
                 card.height = 60
                 card.anchorX = card.width / 2
                 card.anchorY = card.height / 2
+                card.visible = not gameStatus:wasSongPlayed(song)
 
                 self.cardGrid:addComponent(card)
                 table.insert(cards, card)
@@ -63,6 +64,7 @@ PlayState = Class { __includes = State,
         self.scoreButton.visible = false
         self.scoreButton.onLeftClick = function()
             self.scoreButton.visible = false
+            self.breakButton.visible = false
             self.board.forceY = self.board:getCenterY()
             Chain(
                 function(go)
@@ -80,12 +82,39 @@ PlayState = Class { __includes = State,
             )()
         end;
 
+        self.breakButton = ImageButton(images.breakButton)
+        self.breakButton.anchorX = self.breakButton.width / 2
+        self.breakButton.anchorY = self.breakButton.height / 2
+        self.breakButton.x = VIRTUAL_WIDTH - 140
+        self.breakButton.y = VIRTUAL_HEIGHT - 60
+        self.breakButton.visible = false
+        self.breakButton.onLeftClick = function()
+            self.scoreButton.visible = false
+            self.breakButton.visible = false
+            self.board.forceY = self.board:getCenterY()
+            Chain(
+                function(go)
+                    Timer.tween(1, {
+                        [self.board] = {
+                            forceY = -self.board:getHeight()/2
+                        }
+                    })
+                    :group(self.timers)
+                    :finish(go)
+                end,
+                function(go)
+                    self.switchToBreakState = true
+                end
+            )()
+        end;
+
     end;
 
     enter = function(self)
         State.enter(self)
 
         self.switchToScoreState = false
+        self.switchToBreakState = false
         self.timers = {}
 
         self.board:playFallDown()
@@ -96,8 +125,13 @@ PlayState = Class { __includes = State,
             end,
             function(go)
                 self.scoreButton.visible = true
+                self.breakButton.visible = true
                 Timer.tween(0.5, {
                     [self.scoreButton] = {
+                        scaleX = 1.5,
+                        scaleY = 1.5
+                    },
+                    [self.breakButton] = {
                         scaleX = 1.5,
                         scaleY = 1.5
                     }
@@ -111,6 +145,10 @@ PlayState = Class { __includes = State,
                     [self.scoreButton] = {
                         scaleX = 1,
                         scaleY = 1
+                    },
+                    [self.breakButton] = {
+                        scaleX = 1,
+                        scaleY = 1
                     }
                 })
                 :ease(Easing.inExpo)
@@ -119,6 +157,7 @@ PlayState = Class { __includes = State,
             end,
             function(go)
                 self.scoreButton.interactive = true
+                self.breakButton.interactive = true
             end
         )()
     end;
@@ -126,6 +165,7 @@ PlayState = Class { __includes = State,
     exit = function(self, params)
         self.board:destroy()
         self.scoreButton:reset()
+        self.breakButton:reset()
         Timer.clear(self.timers)
         self.timers = {}
     end;
@@ -134,6 +174,7 @@ PlayState = Class { __includes = State,
         State.inputCheck(self, key)
         self.grid:interact()
         self.scoreButton:interact()
+        self.breakButton:interact()
     end;
 
     update = function(self, dt)
@@ -146,10 +187,16 @@ PlayState = Class { __includes = State,
 
         self.grid:update(dt)
         self.scoreButton:update(dt)
+        self.breakButton:update(dt)
 
         if self.switchToScoreState then
             stateMachine:pop()
             stateMachine:push('scoreState')
+        end
+
+        if self.switchToBreakState then
+            stateMachine:pop()
+            stateMachine:push('breakState')
         end
     end;
 
@@ -157,5 +204,6 @@ PlayState = Class { __includes = State,
         self.board:draw()
         self.grid:draw()
         self.scoreButton:draw()
+        self.breakButton:draw()
     end;
 }

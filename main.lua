@@ -35,6 +35,7 @@ function love.load()
     thumbsUp = love.graphics.newImage('assets/images/thumbs-up.png'),
     thumbsDown = love.graphics.newImage('assets/images/thumbs-down.png'),
     scoreButton = love.graphics.newImage('assets/images/score-button.png'),
+    breakButton = love.graphics.newImage('assets/images/break-button.png'),
     stopWatch = {
       bg = love.graphics.newImage('assets/images/stopwatch-bg.png'),
       fg = love.graphics.newImage('assets/images/stopwatch-fg.png'),
@@ -48,17 +49,11 @@ function love.load()
     board = love.graphics.newImage('assets/images/board.png')
   }
 
-  teamManager = TeamManager()
-  teamManager:addTeam(Team('Team One'))
-  teamManager:addTeam(Team('Team Two'))
-  teamManager:addTeam(Team('Team Three'))
-
-  game = GameLoader.load('2022')
+  game = Game.load('2022')
+  gameStatus = GameStatus.load('2022')
 
   love.pressedKeys = {}
   love.leftClicks = {}
-
-  testSong = love.audio.newSource('games/test.mp3', 'stream')
 
   local states = {
     initial = InitialState(),
@@ -66,7 +61,8 @@ function love.load()
     play = PlayState(),
     cardState = CardState(),
     countDownState = CountDownState(),
-    scoreState = ScoreState()
+    scoreState = ScoreState(),
+    breakState = BreakState()
   }
   stateMachine = StateMachine(states)
   stateMachine:change('initial')

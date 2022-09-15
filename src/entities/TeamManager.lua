@@ -19,6 +19,20 @@ TeamManager = Class {
         return teamsSorted
     end;
 
+    getTeams = function(self)
+        return self.teams
+    end;
+
+    getTeamNames = function(self)
+        local outcome = {}
+
+        for i, team in ipairs(self.teams) do
+            table.insert(outcome, team:getName())
+        end
+
+        return outcome
+    end;
+
     nextTeam = function(self)
         self.currentTeam = (self.currentTeam + 1) % #self.teams
 

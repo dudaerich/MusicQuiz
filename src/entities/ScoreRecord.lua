@@ -1,7 +1,14 @@
 ScoreRecord = Class {
-    init = function(self, score)
+    init = function(self, score, song)
         self.score = score
-        -- self.category = category
-        -- self.song = song
+        self.song = song
     end;
+
+    getScore = function(self)
+        return self.score
+    end;
+
+    getSong = function(self)
+        return self.song
+    end
 }

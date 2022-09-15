@@ -47,12 +47,12 @@ CardState = Class { __includes = State,
         State.enter(self, params)
 
         self.passBtn.onLeftClick = function(self)
-            teamManager:getCurrentTeam():addScoreRecord(ScoreRecord(1))
+            gameStatus:addScoreRecordToCurrentTeam(ScoreRecord(1, params.song))
             stateMachine:pop()
         end
 
         self.failBtn.onLeftClick = function(self)
-            teamManager:getCurrentTeam():addScoreRecord(ScoreRecord(0))
+            gameStatus:addScoreRecordToCurrentTeam(ScoreRecord(0, params.song))
             stateMachine:pop()
         end
 
@@ -204,7 +204,7 @@ CardState = Class { __includes = State,
         Timer.clear(self.timers)
         self.timers = {}
         self.answers:clear()
-        teamManager:nextTeam()
+        gameStatus:nextTeam()
     end;
 
     inputCheck = function(self, key)

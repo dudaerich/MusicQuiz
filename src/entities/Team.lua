@@ -8,6 +8,10 @@ Team = Class {
         table.insert(self.scores, scoreRecord)
     end;
 
+    getScoreRecords = function(self)
+        return self.scores
+    end;
+
     getScore = function(self)
         local sum = 0
         
@@ -16,5 +20,9 @@ Team = Class {
         end
         
         return sum
+    end;
+
+    getName = function(self)
+        return self.name
     end;
 }
