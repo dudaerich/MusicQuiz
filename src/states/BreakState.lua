@@ -65,6 +65,10 @@ BreakState = Class { __includes = State,
 
         self.board:playFallDown()
 
+        self.grid.x = self.board:getCenterX()
+        self.grid.y = self.board:getCenterY()
+        self.grid.rotation = self.board:getRotation()
+
         Chain(
             function(go)
                 Timer.after(5, go):group(self.timers)
@@ -100,6 +104,8 @@ BreakState = Class { __includes = State,
 
     exit = function(self)
         self.board:destroy()
+        SongButton.playingSong:getStream():pause()
+        SongButton.playingSong = nil
     end;
 
     inputCheck = function(self, key)

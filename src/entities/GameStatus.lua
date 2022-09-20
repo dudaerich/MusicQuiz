@@ -76,6 +76,7 @@ GameStatus = Class {
         self.teamManager:getCurrentTeam():addScoreRecord(scoreRecord)
         table.insert(self.playedSongsBeforeBreak, scoreRecord:getSong())
         self.playedSongs[scoreRecord:getSong():getId()] = true
+        scoreRecord:getSong():getStream():seek(0)
         self:persist()
     end;
 
