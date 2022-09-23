@@ -7,6 +7,8 @@ Grid = Class { __includes = Container,
     self.rowLength = rowLength
     self.xGap = xGap or 'auto'
     self.yGap = yGap or 'auto'
+    self.maxItems = -1
+    self.currentPage = 0
   end;
 
   computeComponentsStats = function(self)
@@ -16,7 +18,9 @@ Grid = Class { __includes = Container,
     local rowWidth = 0
     local rowHeight = 0
 
-    for i, component in ipairs(self.components) do
+    local components = self:getComponentsOnCurrentPage()
+
+    for i, component in ipairs(components) do
 
       rowWidth = rowWidth + component.width
       rowHeight = math.max(rowHeight, component.height)
@@ -30,7 +34,7 @@ Grid = Class { __includes = Container,
       end
     end
 
-    if (#self.components % self.rowLength ~= 0) then
+    if (#components % self.rowLength ~= 0) then
       numRows = numRows + 1
     end
 
@@ -38,6 +42,34 @@ Grid = Class { __includes = Container,
     componentsHeight = componentsHeight + rowHeight
 
     return componentsWidth, componentsHeight, numRows
+  end;
+
+  getComponentsOnCurrentPage = function(self)
+    if (self.maxItems <= 0) then
+      return self.components
+    else
+      local startPos = self.currentPage * self.maxItems + 1
+      local endPos = startPos + self.maxItems - 1
+      return table.unpack(self.components, startPos, math.min(endPos, #self.components))
+    end
+  end;
+
+  hasNextPage = function(self)
+    return self.maxItems > 0 and self.maxItems * (self.currentPage + 1) < #self.components
+  end;
+
+  hasPreviousPage = function(self)
+    return self.currentPage > 0
+  end;
+
+  nextPage = function(self)
+    self.currentPage = self.currentPage + 1
+    self:reposition()
+  end;
+
+  previousPage = function(self)
+    self.currentPage = self.currentPage - 1
+    self:reposition()
   end;
 
   reposition = function(self)
@@ -51,6 +83,11 @@ Grid = Class { __includes = Container,
     local rowHeight = 0
 
     for i, component in ipairs(self.components) do
+      component:setLeft(-500)
+      component:setTop(-500)
+    end
+
+    for i, component in ipairs(self:getComponentsOnCurrentPage()) do
 
       component:setLeft(curX)
       component:setTop(curY)

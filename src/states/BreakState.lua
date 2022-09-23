@@ -14,6 +14,7 @@ BreakState = Class { __includes = State,
         self.grid = Grid(self.board:getWidth() - 200, self.board:getHeight() - 70, 1, 0, 0)
         -- self.grid.bg = Color.YELLOW
         self.songsGrid = Grid(self.grid.width, self.grid.height - 130, 2)
+        self.songsGrid.maxItems = 10
         -- self.songsGrid.bg = Color.RED
 
         self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
@@ -104,8 +105,10 @@ BreakState = Class { __includes = State,
 
     exit = function(self)
         self.board:destroy()
-        SongButton.playingSong:getStream():pause()
-        SongButton.playingSong = nil
+        if (SongButton.playingSong ~= nil) then
+            SongButton.playingSong:getStream():pause()
+            SongButton.playingSong = nil
+        end
     end;
 
     inputCheck = function(self, key)

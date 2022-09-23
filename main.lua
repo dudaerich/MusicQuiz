@@ -156,3 +156,13 @@ function table.clone(orig)
   end
   return copy
 end
+
+function table.unpack(t, startPos, endPos)
+  local outcome = {}
+  for i, v in ipairs(t) do
+    if (startPos <= i and i <= endPos) then
+      table.insert(outcome, v)
+    end
+  end
+  return outcome
+end
