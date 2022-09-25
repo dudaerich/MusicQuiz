@@ -19,6 +19,7 @@ require 'src/components/Card'
 require 'src/components/StopWatch'
 require 'src/components/Answer'
 require 'src/components/SongButton'
+require 'src/components/ImageLabel'
 
 require 'src/constants'
 require 'src/Color'

@@ -50,6 +50,7 @@ function love.load()
     closeButton = love.graphics.newImage('assets/images/close-button.png'),
     board = love.graphics.newImage('assets/images/board.png'),
     plate = love.graphics.newImage('assets/images/plate.png'),
+    title = love.graphics.newImage('assets/images/title.png'),
   }
 
   game = Game.load('2022')
@@ -165,6 +166,14 @@ function table.unpack(t, startPos, endPos)
     if (startPos <= i and i <= endPos) then
       table.insert(outcome, v)
     end
+  end
+  return outcome
+end
+
+function love.cropText(font, text, width)
+  local outcome = text .. ".."
+  while (font:getWidth(outcome) >= width) do
+      outcome = outcome:sub(1, -4) .. ".."
   end
   return outcome
 end

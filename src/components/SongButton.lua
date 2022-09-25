@@ -120,11 +120,7 @@ SongButton = Class { __includes = Component,
         if (self.textWidth < self.width) then
             return self.song:getAnswer()
         else
-            local outcome = self.song:getAnswer() .. ".."
-            while (self.font:getWidth(outcome) >= self.width) do
-                outcome = outcome:sub(1, -4) .. ".."
-            end
-            return outcome
+            return love.cropText(self.font, self.song:getAnswer(), self.width)
         end
     end;
 

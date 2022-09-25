@@ -10,13 +10,14 @@ PlayState = Class { __includes = State,
 
         -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
         self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
-        self.title = Label(gameStatus:getCurrentTeam():getName(), Color.BLACK, Color.TRANSPARENT, self.woodFont)
-        self.title.width = self.grid.width
-        self.title.height = 50
+        self.title = ImageLabel(gameStatus:getCurrentTeam():getName(), Color.WHITE, images.title, fonts.medium, 5)
+
+        self.titleGrid = Grid(self.grid.width, self.title.height, 1)
+        self.titleGrid:addComponent(self.title)
 
         gameStatus:registerTeamChangeListener(function() self.title.text = gameStatus:getCurrentTeam():getName() end)
 
-        self.grid:addComponent(self.title)
+        self.grid:addComponent(self.titleGrid)
         self.grid:addComponent(self.cardGrid)
 
         local cards = {}
@@ -41,10 +42,11 @@ PlayState = Class { __includes = State,
         end
 
         self.grid:reposition()
+        self.titleGrid:reposition()
         self.cardGrid:reposition()
 
         self.grid.anchorX = self.grid.width / 2
-        self.grid.anchorY = self.grid.height / 2
+        self.grid.anchorY = self.grid.height / 2 + 60
 
         for _, card in ipairs(cards) do
             local pin = Image(images.pin)
