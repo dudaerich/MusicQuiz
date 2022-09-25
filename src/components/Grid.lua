@@ -9,6 +9,8 @@ Grid = Class { __includes = Container,
     self.yGap = yGap or 'auto'
     self.maxItems = -1
     self.currentPage = 0
+
+    self.staticComponents = {}
   end;
 
   computeComponentsStats = function(self)
@@ -73,6 +75,7 @@ Grid = Class { __includes = Container,
   end;
 
   reposition = function(self)
+    table.sort(self.components, function (a, b) return a.addedPos < b.addedPos end)
     local componentsWidth, componentsHeight, numRows = self:computeComponentsStats()
 
     local xGap = self:computeXGap(self.width - componentsWidth, self.rowLength)
@@ -117,6 +120,34 @@ Grid = Class { __includes = Container,
       return gapSpace / (numItems + 1)
     else
       return self.yGap
+    end
+  end;
+
+  addStaticComponent = function(self, component)
+    table.insert(self.staticComponents, component)
+    component.container = self
+  end;
+
+  interact = function(self)
+    Container.interact(self)
+
+    for i, component in ipairs(self.staticComponents) do
+      component:interact()
+    end
+  end;
+
+  update = function(self, dt)
+    Container.update(self, dt)
+
+    for i, component in ipairs(self.staticComponents) do
+      component:update(dt)
+    end
+  end;
+
+  drawComponent = function(self)
+    Container.drawComponent(self)
+    for i, component in ipairs(self.staticComponents) do
+      component:draw()
     end
   end;
 }

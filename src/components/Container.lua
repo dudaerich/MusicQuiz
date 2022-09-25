@@ -6,6 +6,7 @@ Container = Class { __includes = Component,
   end;
 
   addComponent = function(self, component)
+    component.addedPos = #self.components
     table.insert(self.components, component)
     component.container = self
   end;

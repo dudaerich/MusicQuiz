@@ -36,6 +36,8 @@ function love.load()
     thumbsDown = love.graphics.newImage('assets/images/thumbs-down.png'),
     scoreButton = love.graphics.newImage('assets/images/score-button.png'),
     breakButton = love.graphics.newImage('assets/images/break-button.png'),
+    leftArrowButton = love.graphics.newImage('assets/images/left-arrow-button.png'),
+    rightArrowButton = love.graphics.newImage('assets/images/right-arrow-button.png'),
     stopWatch = {
       bg = love.graphics.newImage('assets/images/stopwatch-bg.png'),
       fg = love.graphics.newImage('assets/images/stopwatch-fg.png'),
