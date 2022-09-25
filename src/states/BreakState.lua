@@ -25,7 +25,9 @@ BreakState = Class { __includes = State,
         self.grid:addComponent(self.title)
         self.grid:addComponent(self.songsGrid)
 
-        for i, song in pairs(gameStatus:getPlayedSongsBeforeBreak()) do
+        local playedSongs = gameStatus:getPlayedSongs()
+        for i = #playedSongs, 1, -1 do
+            local song = playedSongs[i]
             local songLabel = SongButton(song)
             songLabel.anchorX = songLabel.width / 2
             songLabel.anchorY = songLabel.height / 2

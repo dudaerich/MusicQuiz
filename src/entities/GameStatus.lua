@@ -18,7 +18,7 @@ GameStatus = Class {
                 local score = scoreData.score
                 local song = game:getSong(scoreData.song)
                 team:addScoreRecord(ScoreRecord(score, song))
-                playedSongs[scoreData.song] = true
+                table.insert(playedSongs, song)
             end
 
             teamManager:addTeam(team)
@@ -26,20 +26,18 @@ GameStatus = Class {
 
         teamManager.currentTeam = jsonData.currentTeam or 0
 
-        local playedSongsBeforeBreak = {}
-
-        for i, song in ipairs(jsonData.playedSongsBeforeBreak or {}) do
-            table.insert(playedSongsBeforeBreak, game:getSong(song))
-        end
-
-        return GameStatus(path, teamManager, playedSongs, playedSongsBeforeBreak)
+        return GameStatus(path, teamManager, playedSongs)
     end;
 
-    init = function(self, path, teamManager, playedSongs, playedSongsBeforeBreak)
+    init = function(self, path, teamManager, playedSongs)
         self.path = path
         self.teamManager = teamManager
-        self.playedSongs = playedSongs
-        self.playedSongsBeforeBreak = playedSongsBeforeBreak
+        self.playedSongsList = playedSongs
+        self.playedSongsSet = {}
+
+        for i, song in ipairs(playedSongs) do
+            self.playedSongsSet[song.id] = true
+        end
     end;
 
     persist = function(self)
@@ -61,21 +59,14 @@ GameStatus = Class {
 
         jsonData.scores = scores
 
-        local playedSongsBeforeBreak = {}
-        for i, song in ipairs(self.playedSongsBeforeBreak) do
-            table.insert(playedSongsBeforeBreak, song:getId())
-        end
-
-        jsonData.playedSongsBeforeBreak = playedSongsBeforeBreak
-
         local content = json.encode(jsonData)
         love.filesystem.write(self.path, content)
     end;
 
     addScoreRecordToCurrentTeam = function(self, scoreRecord)
         self.teamManager:getCurrentTeam():addScoreRecord(scoreRecord)
-        table.insert(self.playedSongsBeforeBreak, scoreRecord:getSong())
-        self.playedSongs[scoreRecord:getSong():getId()] = true
+        table.insert(self.playedSongsList, scoreRecord:getSong())
+        self.playedSongsSet[scoreRecord:getSong():getId()] = true
         scoreRecord:getSong():getStream():seek(0)
         self:persist()
     end;
@@ -98,10 +89,10 @@ GameStatus = Class {
     end;
 
     wasSongPlayed = function(self, song)
-        return self.playedSongs[song.id] == true
+        return self.playedSongsSet[song.id] == true
     end;
 
-    getPlayedSongsBeforeBreak = function(self)
-        return self.playedSongsBeforeBreak
+    getPlayedSongs = function(self)
+        return self.playedSongsList
     end;
 }
