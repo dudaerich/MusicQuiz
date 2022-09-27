@@ -17,12 +17,12 @@ BreakState = Class { __includes = State,
         self.songsGrid.maxItems = 10
         -- self.songsGrid.bg = Color.RED
 
-        self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
-        self.title = Label('Prestavka', Color.BLACK, Color.TRANSPARENT, self.woodFont)
-        self.title.width = self.grid.width
-        self.title.height = 50
+        self.title = ImageLabel('Prestavka', Color.WHITE, images.title, fonts.medium, 5)
+        
+        self.titleGrid = Grid(self.grid.width, self.title.height, 1)
+        self.titleGrid:addComponent(self.title)
 
-        self.grid:addComponent(self.title)
+        self.grid:addComponent(self.titleGrid)
         self.grid:addComponent(self.songsGrid)
 
         local playedSongs = gameStatus:getPlayedSongs()
@@ -36,10 +36,11 @@ BreakState = Class { __includes = State,
         end
 
         self.grid:reposition()
+        self.titleGrid:reposition()
         self.songsGrid:reposition()
 
         self.grid.anchorX = self.grid.width / 2
-        self.grid.anchorY = self.grid.height / 2
+        self.grid.anchorY = self.grid.height / 2 + 60
 
         self.closeButton = ImageButton(images.closeButton)
         self.closeButton.anchorX = self.closeButton.width / 2

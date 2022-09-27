@@ -8,8 +8,6 @@ PlayState = Class { __includes = State,
         self.cardGrid = Grid(self.grid.width, self.grid.height - 130, 11)
         -- self.cardGrid.bg = Color.RED
 
-        -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
-        self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
         self.title = ImageLabel(gameStatus:getCurrentTeam():getName(), Color.WHITE, images.title, fonts.medium, 5)
 
         self.titleGrid = Grid(self.grid.width, self.title.height, 1)
@@ -23,9 +21,11 @@ PlayState = Class { __includes = State,
         local cards = {}
 
         for i, category in ipairs(game:getCategories()) do
-            local label = Label(category:getTitle(), Color.BLACK, Color.TRANSPARENT, self.woodFont)
-            label.width = 200
-            label.height = 50
+            local label = SingleLineImageLabel(category:getTitle(), Color.WHITE, images.plateMedium, fonts.medium, 7)
+            label.setTop = function(self, top)
+                Component.setTop(self, top)
+                self.y = self.y - 7
+            end
             self.cardGrid:addComponent(label)
 
             for j, song in ipairs(category:getSongs()) do
@@ -45,7 +45,7 @@ PlayState = Class { __includes = State,
         self.titleGrid:reposition()
         self.cardGrid:reposition()
 
-        self.grid.anchorX = self.grid.width / 2
+        self.grid.anchorX = self.grid.width / 2 - 5
         self.grid.anchorY = self.grid.height / 2 + 60
 
         for _, card in ipairs(cards) do

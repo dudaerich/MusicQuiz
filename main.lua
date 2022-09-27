@@ -50,6 +50,7 @@ function love.load()
     closeButton = love.graphics.newImage('assets/images/close-button.png'),
     board = love.graphics.newImage('assets/images/board.png'),
     plate = love.graphics.newImage('assets/images/plate.png'),
+    plateMedium = love.graphics.newImage('assets/images/plate-medium.png'),
     plateShort = love.graphics.newImage('assets/images/plate-short.png'),
     title = love.graphics.newImage('assets/images/title.png'),
   }
