@@ -20,6 +20,7 @@ require 'src/components/StopWatch'
 require 'src/components/Answer'
 require 'src/components/SongButton'
 require 'src/components/ImageLabel'
+require 'src/components/SingleLineImageLabel'
 
 require 'src/constants'
 require 'src/Color'

@@ -18,31 +18,28 @@ ScoreState = Class { __includes = State,
 
         -- title = Label('Team 1', Color.BLACK, Color(40/255, 45/255, 52/255, 255/255))
         self.woodFont = love.graphics.newFont('assets/fonts/wood.ttf', 30)
-        self.title = Label('Skore', Color.BLACK, Color.TRANSPARENT, self.woodFont)
-        self.title.width = self.grid.width
-        self.title.height = 50
+        self.title = ImageLabel('Skore', Color.WHITE, images.title, fonts.medium, 5)
+        
+        self.titleGrid = Grid(self.grid.width, self.title.height, 1)
+        self.titleGrid:addComponent(self.title)
 
-        self.grid:addComponent(self.title)
+        self.grid:addComponent(self.titleGrid)
         self.grid:addComponent(self.teamGrid)
 
         for i, team in pairs(gameStatus:getAllTeamsOrderedByScore()) do
-            local teamLabel = Label(team.name, Color.BLACK, Color.TRANSPARENT, fonts.medium)
-            teamLabel.width = 200
-            teamLabel.height = 50
-
-            local scoreLabel = Label(team:getScore(), Color.BLACK, Color.TRANSPARENT, fonts.medium)
-            scoreLabel.width = 200
-            scoreLabel.height = 50
+            local teamLabel = SingleLineImageLabel(team.name, Color.WHITE, images.plate, fonts.medium, 7)
+            local scoreLabel = SingleLineImageLabel(team:getScore(), Color.WHITE, images.plateShort, fonts.medium, 7)
 
             self.teamGrid:addComponent(teamLabel)
             self.teamGrid:addComponent(scoreLabel)
         end
 
         self.grid:reposition()
+        self.titleGrid:reposition()
         self.teamGrid:reposition()
 
         self.grid.anchorX = self.grid.width / 2
-        self.grid.anchorY = self.grid.height / 2
+        self.grid.anchorY = self.grid.height / 2 + 60
 
         self.closeButton = ImageButton(images.closeButton)
         self.closeButton.anchorX = self.closeButton.width / 2

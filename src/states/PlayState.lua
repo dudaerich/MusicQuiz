@@ -15,7 +15,7 @@ PlayState = Class { __includes = State,
         self.titleGrid = Grid(self.grid.width, self.title.height, 1)
         self.titleGrid:addComponent(self.title)
 
-        gameStatus:registerTeamChangeListener(function() self.title.text = gameStatus:getCurrentTeam():getName() end)
+        gameStatus:registerTeamChangeListener(function() self.title:setText(gameStatus:getCurrentTeam():getName()) end)
 
         self.grid:addComponent(self.titleGrid)
         self.grid:addComponent(self.cardGrid)

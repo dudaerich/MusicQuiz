@@ -5,12 +5,16 @@ ImageLabel = Class { __includes = Component,
         self.font = font
         self.bg = bg
         self.fg = fg
-        self.text = text
         self.margin = margin
         self.width, self.height = self.bg:getDimensions()
         self.width = self.width - 2 * margin
         self.height = self.height - 2 * margin
         self.fontHeight = self.font:getHeight()
+        self:setText(text)
+    end;
+
+    setText = function(self, text)
+        self.text = text
         self.lines = self:splitTextToLines(self.text)
     end;
 
