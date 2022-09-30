@@ -21,22 +21,28 @@ Game = Class {
     loadCategories = function(self, workingDirectory, data)
         local outcome = {}
         for title, category in pairs(data.categories) do
-            print('Loading category ' .. title)
-            local category = Category(title, category.maxPoints, self:loadSongs(workingDirectory, category.songs))
+            local category = Category(title, category.maxPoints, self:loadSongs(workingDirectory, category.songs, category.maxPoints))
             table.insert(outcome, category)
         end
 
         return outcome
     end;
 
-    loadSongs = function(self, workingDirectory, songsData)
+    loadSongs = function(self, workingDirectory, songsData, maxPoints)
         local outcome = {}
-        for i, song in pairs(songsData) do
-            local source = workingDirectory .. '/' .. song.src
-            local songId = song.src
-            local song = Song(songId, song.answer, source, song.start, song.duration)
-            table.insert(outcome, song)
-            self.songs[songId] = song
+        for i, song in ipairs(songsData) do
+            if (song.type == "gold bar") then
+                local id = "gold-bar-" .. i
+                local goldBar = GoldBar(id, maxPoints)
+                table.insert(outcome, goldBar)
+                self.songs[id] = goldBar
+            else
+                local source = workingDirectory .. '/' .. song.src
+                local songId = song.src
+                local song = Song(songId, song.answer, source, song.start, song.duration, maxPoints)
+                table.insert(outcome, song)
+                self.songs[songId] = song
+            end
         end
         return outcome
     end;

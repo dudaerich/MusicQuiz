@@ -5,7 +5,59 @@ Card = Class { __includes = Button,
     self.imgDefault = images.card
     self.imgFocus = images.cardFocus
     self.img = self.imgDefault
+    self.width, self.height = self.img:getDimensions()
     self.song = song
+
+
+    self.mainGrid = Grid(self.width, self.height, 1, "auto", "auto")
+
+    local points = Label(self:getPointsText(), Color.BLACK, Color.TRANSPARENT, fonts.medium)
+    points.scaleX = -0.1
+    points.scaleY = 0.1
+    points.anchorX = points.width / 2
+    points.anchorY = points.height / 2
+
+    local pointsRow = Grid(self.mainGrid.width, points:getHeight(), 1)
+    pointsRow:addComponent(points)
+    pointsRow:reposition()
+    self.mainGrid:addComponent(pointsRow)
+
+    local goldBar = Image(images.goldBar)
+    goldBar.scaleX = -0.1
+    goldBar.scaleY = 0.1
+    goldBar.anchorX = goldBar.width / 2
+    goldBar.anchorY = goldBar.height / 2
+
+    local goldBarRow = Grid(self.mainGrid.width, goldBar:getHeight(), 1)
+    goldBarRow:addComponent(goldBar)
+    goldBarRow:reposition()
+    self.mainGrid:addComponent(goldBarRow)
+
+    local closeButton = ImageButton(images.closeButton)
+    closeButton.scaleX = -0.1
+    closeButton.scaleY = 0.1
+    closeButton.anchorX = closeButton.width / 2
+    closeButton.anchorY = closeButton.height / 2
+
+    local closeButtonRow = Grid(self.mainGrid.width, closeButton:getHeight(), 1)
+    closeButtonRow:addComponent(closeButton)
+    closeButtonRow:reposition()
+    self.mainGrid:addComponent(closeButtonRow)
+
+    self.mainGrid:reposition()
+
+  end;
+
+  getPointsText = function(self)
+    local maxPoints = self.song.maxPoints
+
+    if maxPoints == 1 then
+      return "+1 bod"
+    elseif maxPoints > 1 and maxPoints < 5 then
+      return "+" .. maxPoints .. " body"
+    else
+      return "+" .. maxPoints .. " bodov"
+    end
   end;
 
   onMouseOverEnter = function(self)
@@ -51,7 +103,11 @@ Card = Class { __includes = Button,
       end,
       function(go)
         self.visible = false
-        stateMachine:push('cardState', {song = self.song})
+        if (self.song.type == "gold bar") then
+          stateMachine:push('goldBarState', {song = self.song})
+        else
+          stateMachine:push('cardState', {song = self.song})
+        end
       end
     )()
   end;
@@ -70,5 +126,9 @@ Card = Class { __includes = Button,
     love.graphics.setColor(self.fg.r, self.fg.g, self.fg.b, self.fg.a)
     love.graphics.setFont(self.font)
     love.graphics.printf(tostring(self.text), 0, self.height / 2 - 25, self.width, 'center')
+
+    if self.scaleX < 0 and self.song.type == "gold bar" then
+      self.mainGrid:draw()
+    end
   end;
 }

@@ -1,10 +1,12 @@
 Song = Class {
-    init = function(self, id, answer, source, start, duration)
+    init = function(self, id, answer, source, start, duration, maxPoints)
         self.id = id
         self.answer = answer
         self.stream = love.audio.newSource(source, 'stream')
         self.start = self:parseStart(start)
         self.duration = duration
+        self.maxPoints = maxPoints
+        self.type = "song"
     end;
 
     parseStart = function(self, start)

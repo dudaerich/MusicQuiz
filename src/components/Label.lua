@@ -6,6 +6,13 @@ Label = Class { __includes = Component,
     self.fg = fg
     self.bg = bg
     self.font = font
+    self.width = font:getWidth(text)
+    self.height = font:getHeight()
+  end;
+
+  setText = function(self, text)
+    self.text = text
+    self.width = self.font:getWidth(text)
   end;
 
   drawComponent = function(self)

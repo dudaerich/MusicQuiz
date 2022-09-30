@@ -24,8 +24,8 @@ Grid = Class { __includes = Container,
 
     for i, component in ipairs(components) do
 
-      rowWidth = rowWidth + component.width
-      rowHeight = math.max(rowHeight, component.height)
+      rowWidth = rowWidth + component:getWidth()
+      rowHeight = math.max(rowHeight, component:getHeight())
 
       if (i % self.rowLength == 0) then
         componentsWidth = math.max(componentsWidth, rowWidth)
@@ -95,8 +95,8 @@ Grid = Class { __includes = Container,
       component:setLeft(curX)
       component:setTop(curY)
 
-      curX = curX + component.width + xGap
-      rowHeight = math.max(rowHeight, component.height)
+      curX = curX + component:getWidth() + xGap
+      rowHeight = math.max(rowHeight, component:getHeight())
 
       if (i % self.rowLength == 0) then
         curX = xGap

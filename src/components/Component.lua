@@ -83,19 +83,19 @@ Component = Class {
   end;
 
   getLeft = function(self)
-    return self.x - self.anchorX
+    return self.x - self:getAnchorX()
   end;
 
   getTop = function(self)
-    return self.y - self.anchorY
+    return self.y - self:getAnchorY()
   end;
 
   setLeft = function(self, left)
-    self.x = left + self.anchorX
+    self.x = left + self:getAnchorX()
   end;
 
   setTop = function(self, top)
-    self.y = top + self.anchorY
+    self.y = top + self:getAnchorY()
   end;
 
   getAbsoluteLeft = function(self)
@@ -107,11 +107,19 @@ Component = Class {
   end;
 
   getWidth = function(self)
-    return self.width
+    return math.abs(self.width * self.scaleX)
   end;
 
   getHeight = function(self)
-    return self.height
+    return math.abs(self.height * self.scaleY)
+  end;
+
+  getAnchorX = function(self)
+    return self.anchorX * math.abs(self.scaleX)
+  end;
+
+  getAnchorY = function(self)
+    return self.anchorY * math.abs(self.scaleY)
   end;
 
   update = function(self, dt) end;

@@ -53,6 +53,7 @@ function love.load()
     plateMedium = love.graphics.newImage('assets/images/plate-medium.png'),
     plateShort = love.graphics.newImage('assets/images/plate-short.png'),
     title = love.graphics.newImage('assets/images/title.png'),
+    goldBar = love.graphics.newImage('assets/images/gold-bar.png'),
   }
 
   game = Game.load('2022')
@@ -66,6 +67,7 @@ function love.load()
     intro = IntroState(),
     play = PlayState(),
     cardState = CardState(),
+    goldBarState = GoldBarState(),
     countDownState = CountDownState(),
     scoreState = ScoreState(),
     breakState = BreakState()
