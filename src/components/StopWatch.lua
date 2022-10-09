@@ -21,10 +21,13 @@ StopWatch = Class { __includes = Component,
 
     start = function(self)
         self.started = true
+        sounds.clockTicking:seek(0)
+        sounds.clockTicking:play()
     end;
 
     stop = function(self)
         self.started = false
+        sounds.clockTicking:stop()
     end;
 
     reset = function(self)

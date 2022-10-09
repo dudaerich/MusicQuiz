@@ -141,6 +141,10 @@ CardState = Class { __includes = State,
                 self.stopWatch:start()
             end,
             function(go)
+                sounds.countDownEnd:play()
+                Timer.after(2, go):group(self.timers)
+            end,
+            function(go)
                 local startX = self.passBtn.x
                 local startY = self.passBtn.y
 
@@ -201,6 +205,7 @@ CardState = Class { __includes = State,
         self.stopWatch.visible = false
         self.stopWatch.scaleX = 1
         self.stopWatch.scaleY = 1
+        self.stopWatch:stop()
         Timer.clear(self.timers)
         self.timers = {}
         self.answers:clear()

@@ -56,6 +56,12 @@ function love.load()
     goldBar = love.graphics.newImage('assets/images/gold-bar.png'),
   }
 
+  sounds = {
+    countDownStart = love.audio.newSource('assets/sounds/count-down-start.wav', 'static'),
+    countDownEnd = love.audio.newSource('assets/sounds/count-down-end.wav', 'static'),
+    clockTicking = love.audio.newSource('assets/sounds/clock-ticking.mp3', 'stream')
+  }
+
   game = Game.load('2022')
   gameStatus = GameStatus.load('2022')
 
