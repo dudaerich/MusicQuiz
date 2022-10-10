@@ -2,23 +2,23 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="62.973335mm"
    height="62.973335mm"
    viewBox="0 0 62.973335 62.973335"
    version="1.1"
    id="svg820"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="thumbs-up.svg"
-   inkscape:export-filename="/home/eduda/Projects/MusicQuiz/assets/images/thumbs-up.png"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="thumbs-up-5.svg"
+   inkscape:export-filename="/home/eduda/Projects/MusicQuiz/assets/images/thumbs-up-5.png"
    inkscape:export-xdpi="32.267624"
-   inkscape:export-ydpi="32.267624">
+   inkscape:export-ydpi="32.267624"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs814" />
   <sodipodi:namedview
@@ -28,21 +28,22 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="80.335063"
-     inkscape:cy="-42.052307"
+     inkscape:zoom="1.979899"
+     inkscape:cx="64.902301"
+     inkscape:cy="181.06984"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1848"
+     inkscape:window-width="1846"
      inkscape:window-height="1016"
-     inkscape:window-x="72"
-     inkscape:window-y="27"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      fit-margin-top="2"
      fit-margin-left="2"
      fit-margin-right="2"
-     fit-margin-bottom="2" />
+     fit-margin-bottom="2"
+     inkscape:pagecheckerboard="0" />
   <metadata
      id="metadata817">
     <rdf:RDF>
@@ -51,7 +52,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -255,5 +255,22 @@
          d="m 113.45302,109.38029 c 0,0 -0.41306,1.26808 -0.41786,1.85095 -0.005,0.58286 0.33429,1.60057 0.33429,1.60057"
          style="fill:none;stroke:#a98400;stroke-width:0.14433138;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
+    <circle
+       style="fill:#4a9f1f;fill-opacity:1;stroke:none;stroke-width:1.54038;stroke-linecap:round;stroke-linejoin:round"
+       id="path877"
+       cx="120.51241"
+       cy="95.709709"
+       r="10.398114" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5644px;line-height:1.25;font-family:'Disco Inferno';-inkscape-font-specification:'Disco Inferno';letter-spacing:0px;word-spacing:0px;fill:#ffc600;fill-opacity:1;stroke:none;stroke-width:0.471165"
+       x="112.10941"
+       y="100.77095"
+       id="text4645"><tspan
+         sodipodi:role="line"
+         id="tspan4643"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5644px;font-family:'Komika Axis';-inkscape-font-specification:'Komika Axis';fill:#ffc600;fill-opacity:1;stroke-width:0.471165"
+         x="112.10941"
+         y="100.77095">+5</tspan></text>
   </g>
 </svg>

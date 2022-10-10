@@ -11,6 +11,10 @@ Container = Class { __includes = Component,
     component.container = self
   end;
 
+  getComponents = function(self)
+    return self.components
+  end;
+
   clear = function(self)
     self.components = {}
   end;

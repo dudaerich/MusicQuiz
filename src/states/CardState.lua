@@ -23,10 +23,6 @@ CardState = Class { __includes = State,
 
         self.answers = Grid(self.card.width, 100, 1)
 
-        self.passBtn = ImageButton(images.thumbsUp)
-        self.passBtn.anchorX = self.passBtn.width / 2
-        self.passBtn.anchorY = self.passBtn.height / 2
-
         self.failBtn = ImageButton(images.thumbsDown)
         self.failBtn.anchorX = self.failBtn.width / 2
         self.failBtn.anchorY = self.failBtn.height / 2
@@ -46,8 +42,12 @@ CardState = Class { __includes = State,
     enter = function(self, params)
         State.enter(self, params)
 
+        self.passBtn = ImageButton(images['thumbsUp' .. params.song.maxPoints])
+        self.passBtn.anchorX = self.passBtn.width / 2
+        self.passBtn.anchorY = self.passBtn.height / 2
+
         self.passBtn.onLeftClick = function(self)
-            gameStatus:addScoreRecordToCurrentTeam(ScoreRecord(1, params.song))
+            gameStatus:addScoreRecordToCurrentTeam(ScoreRecord(params.song.maxPoints, params.song))
             stateMachine:pop()
         end
 
@@ -56,7 +56,6 @@ CardState = Class { __includes = State,
             stateMachine:pop()
         end
 
-        self.passBtn:reset()
         self.failBtn:reset()
 
         self.song = params.song
@@ -148,42 +147,53 @@ CardState = Class { __includes = State,
                 local startX = self.passBtn.x
                 local startY = self.passBtn.y
 
-                self.answers.rowLength = 2
+                self.answers.rowLength = params.song.maxPoints + 1
+
+                for i = params.song.maxPoints - 1, 1, -1 do
+                    local button = ImageButton(images['thumbsUp' .. i])
+                    button.anchorX = self.passBtn.width / 2
+                    button.anchorY = self.passBtn.height / 2
+
+                    button.onLeftClick = function(self)
+                        gameStatus:addScoreRecordToCurrentTeam(ScoreRecord(i, params.song))
+                        stateMachine:pop()
+                    end
+
+                    self.answers:addComponent(button)
+                end
+
                 self.answers:addComponent(self.failBtn)
 
                 self.mainGrid:reposition()
                 self.answers:reposition()
 
-                local passBtnTargetX = self.passBtn.x
-                local passBtnTargetY = self.passBtn.y
-                local failBtnTargetX = self.failBtn.x
-                local failBtnTargetY = self.failBtn.y
+                local targets = {}
 
-                self.passBtn.x = startX
-                self.passBtn.y = startY
-                self.failBtn.x = startX
-                self.failBtn.y = startY
+                for i, btn in ipairs(self.answers:getComponents()) do
+                    table.insert(targets, {btn = btn, targetX = btn.x, targetY = btn.y})
+                    btn.x = startX
+                    btn.y = startY
+                    btn.interactive = false
+                end
 
-                self.passBtn.interactive = false
-                self.failBtn.interactive = false
+                local tweenData = {}
 
-                Timer.tween(0.5, {
-                    [self.passBtn] = {
-                        x = passBtnTargetX,
-                        y = passBtnTargetY
-                    },
-                    [self.failBtn] = {
-                        x = failBtnTargetX,
-                        y = failBtnTargetY
+                for i, target in ipairs(targets) do
+                    tweenData[target.btn] = {
+                        x = target.targetX,
+                        y = target.targetY
                     }
-                })
-                :ease(Easing.outExpo)
-                :group(self.timers)
-                :finish(go)
+                end
+
+                Timer.tween(0.5, tweenData)
+                    :ease(Easing.outExpo)
+                    :group(self.timers)
+                    :finish(go)
             end,
             function(go)
-                self.passBtn.interactive = true
-                self.failBtn.interactive = true
+                for i, btn in ipairs(self.answers:getComponents()) do
+                    btn.interactive = true
+                end
                 self.answer:uncover()
             end
         )
