@@ -6,6 +6,8 @@ BreakState = Class { __includes = State,
     enter = function(self)
         State.enter(self)
 
+        sounds.background:pause()
+
         self.switchToPlayState = false
         self.timers = {}
 
@@ -143,6 +145,7 @@ BreakState = Class { __includes = State,
             SongButton.playingSong:getStream():pause()
             SongButton.playingSong = nil
         end
+        sounds.background:play()
     end;
 
     inputCheck = function(self, key)

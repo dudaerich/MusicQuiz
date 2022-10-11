@@ -78,6 +78,7 @@ IntroState = Class { __includes = State,
     end;
 
     enter = function(self)
+        sounds.background:play()
         self.bgAlpha = 0
 
         Chain(

@@ -56,8 +56,12 @@ function love.load()
   sounds = {
     countDownStart = love.audio.newSource('assets/sounds/count-down-start.wav', 'static'),
     countDownEnd = love.audio.newSource('assets/sounds/count-down-end.wav', 'static'),
-    clockTicking = love.audio.newSource('assets/sounds/clock-ticking.mp3', 'stream')
+    clockTicking = love.audio.newSource('assets/sounds/clock-ticking.mp3', 'stream'),
+    background = love.audio.newSource('assets/sounds/non-free/ES_Press X Twice - Lexica.mp3', 'stream')
   }
+
+  sounds.background:setVolume(0.3)
+  sounds.background:setLooping(true)
 
   assert(#arg == 2, "Invalid number of arguments. You must run the game using love . <name of the game>")
 
@@ -100,7 +104,7 @@ function love.draw()
 
   stateMachine:draw()
 
-  displayFPS()
+  -- displayFPS()
 
   push:finish()
 

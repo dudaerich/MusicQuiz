@@ -42,6 +42,8 @@ CardState = Class { __includes = State,
     enter = function(self, params)
         State.enter(self, params)
 
+        sounds.background:pause()
+
         self.passBtn = ImageButton(images['thumbsUp' .. params.song.maxPoints])
         self.passBtn.anchorX = self.passBtn.width / 2
         self.passBtn.anchorY = self.passBtn.height / 2
@@ -220,6 +222,7 @@ CardState = Class { __includes = State,
         self.timers = {}
         self.answers:clear()
         gameStatus:nextTeam()
+        sounds.background:play()
     end;
 
     inputCheck = function(self, key)
