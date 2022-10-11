@@ -68,6 +68,10 @@ ScoreState = Class { __includes = State,
 
         self.board:playFallDown()
 
+        self.grid.x = self.board:getCenterX()
+        self.grid.y = self.board:getCenterY()
+        self.grid.rotation = self.board:getRotation()
+
         Chain(
             function(go)
                 Timer.after(5, go):group(self.timers)

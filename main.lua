@@ -4,13 +4,6 @@ WINDOW_WIDTH, WINDOW_HEIGHT = love.window.getDesktopDimensions()
 
 function love.load()
 
-  print("Program name", arg[0])
-  print("Number of arguments: ", #arg)
-  print("Arguments:")
-  for l = 1, #arg do
-    print(l," ",arg[l])
-  end
-
   love.window.setTitle('Music Quiz')
 
   push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -66,8 +59,12 @@ function love.load()
     clockTicking = love.audio.newSource('assets/sounds/clock-ticking.mp3', 'stream')
   }
 
-  game = Game.load('2022')
-  gameStatus = GameStatus.load('2022')
+  assert(#arg == 2, "Invalid number of arguments. You must run the game using love . <name of the game>")
+
+  local gameName = arg[2]
+
+  game = Game.load(gameName)
+  gameStatus = GameStatus.load(gameName)
 
   love.pressedKeys = {}
   love.leftClicks = {}
@@ -149,7 +146,6 @@ end
 function love.mousereleased(x, y, button, istouch, presses)
   if button == 1 then
     local vx, vy = computeVirtualPosition(x, y)
-    print('Click ' .. vx .. '; ' .. vy)
     table.insert(love.leftClicks, {x=vx, y=vy})
   end
 end

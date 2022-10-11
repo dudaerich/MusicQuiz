@@ -95,6 +95,14 @@ GameStatus = Class {
     end;
 
     getPlayedSongs = function(self)
-        return self.playedSongsList
+        local outcome = {}
+
+        for i, song in ipairs(self.playedSongsList) do
+            if song.type == "song" then
+                table.insert(outcome, song)
+            end
+        end
+
+        return outcome
     end;
 }

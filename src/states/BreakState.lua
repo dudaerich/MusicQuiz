@@ -72,14 +72,14 @@ BreakState = Class { __includes = State,
         self.previousPageBtn.anchorX = self.previousPageBtn.width / 2
         self.previousPageBtn.anchorY = self.previousPageBtn.height / 2
         self.previousPageBtn.x = 0
-        self.previousPageBtn.y = self.grid:getHeight() / 2
+        self.previousPageBtn.y = self.songsGrid:getHeight() / 2
 
         self.nextPageBtn = ImageButton(images.rightArrowButton)
         self.nextPageBtn.visible = self.songsGrid:hasNextPage()
         self.nextPageBtn.anchorX = self.nextPageBtn.width / 2
         self.nextPageBtn.anchorY = self.nextPageBtn.height / 2
-        self.nextPageBtn.x = self.grid:getWidth() + 20
-        self.nextPageBtn.y = self.grid:getHeight() / 2
+        self.nextPageBtn.x = self.songsGrid:getWidth() + 20
+        self.nextPageBtn.y = self.songsGrid:getHeight() / 2
 
 
         self.previousPageBtn.onLeftClick = function()
@@ -95,8 +95,8 @@ BreakState = Class { __includes = State,
         end
 
 
-        self.grid:addStaticComponent(self.previousPageBtn)
-        self.grid:addStaticComponent(self.nextPageBtn)
+        self.songsGrid:addStaticComponent(self.previousPageBtn)
+        self.songsGrid:addStaticComponent(self.nextPageBtn)
 
         self.board:playFallDown()
 

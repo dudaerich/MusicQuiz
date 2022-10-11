@@ -33,7 +33,7 @@ Game = Class {
         for i, song in ipairs(songsData) do
             if (song.type == "gold bar") then
                 local id = "gold-bar-" .. i
-                local goldBar = GoldBar(id, maxPoints)
+                local goldBar = GoldBar(id)
                 table.insert(outcome, goldBar)
                 self.songs[id] = goldBar
             else
