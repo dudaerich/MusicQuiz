@@ -26,13 +26,22 @@ ScoreState = Class { __includes = State,
         self.grid:addComponent(self.titleGrid)
         self.grid:addComponent(self.teamGrid)
 
+        self.labels = {}
+
         for i, team in pairs(gameStatus:getAllTeamsOrderedByScore()) do
             local teamLabel = SingleLineImageLabel(team.name, Color.WHITE, images.plate, fonts.medium, 7)
             local scoreLabel = SingleLineImageLabel(team:getScore(), Color.WHITE, images.plateShort, fonts.medium, 7)
 
+            teamLabel.visible = false
+            scoreLabel.visible = false
+
             self.teamGrid:addComponent(teamLabel)
             self.teamGrid:addComponent(scoreLabel)
+
+            table.insert(self.labels, {team = teamLabel, score = scoreLabel})
         end
+
+        self.nextLabel = #self.labels
 
         self.grid:reposition()
         self.titleGrid:reposition()
@@ -113,6 +122,31 @@ ScoreState = Class { __includes = State,
         State.inputCheck(self, key)
         self.grid:interact()
         self.closeButton:interact()
+
+        if love.wasAnyKeyPressed() and self.labels ~= nil and self.nextLabel > 0 then
+            local label = self.labels[self.nextLabel]
+            local teamTargetY = label.team.y
+            local scoreTargetY = label.score.y
+
+            label.team.y = VIRTUAL_HEIGHT + 200
+            label.score.y = VIRTUAL_HEIGHT + 200
+
+            label.team.visible = true
+            label.score.visible = true
+
+            Timer.tween(1, {
+                [label.team] = {
+                    y = teamTargetY
+                },
+                [label.score] = {
+                    y = scoreTargetY
+                }
+            })
+            :ease(Easing.outExpo)
+            :group(self.timers)
+
+            self.nextLabel = self.nextLabel - 1
+        end
     end;
 
     update = function(self, dt)
